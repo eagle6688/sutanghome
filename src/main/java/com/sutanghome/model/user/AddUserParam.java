@@ -48,9 +48,15 @@ public class AddUserParam {
 
 	public User toEntity() {
 		User entity = new User();
-		entity.setCellphone(cellphone);
 		entity.setName(name);
+		entity.setCellphone(cellphone);
 		entity.setPassword(SHA256Utils.encipherToHex(password));
+		return entity;
+	}
+
+	public User toCountEntity() {
+		User entity = new User();
+		entity.setName(name);
 		return entity;
 	}
 }

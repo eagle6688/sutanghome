@@ -5,11 +5,16 @@
 		<setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
 	<typeAliases>
-		<package name="sutanghome.dao.entities" />
+		<package name="devutility.internal.models" />
+		<package name="com.sutanghome.dao.entities" />
+		<package name="com.sutanghome.dao.model" />
 	</typeAliases>
+	<typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.EnumTypeHandler" javaType="com.sutanghome.common.constant.PayMediumType" />
+	</typeHandlers>
 	<mappers>
-		<mapper resource="mappers/fundMapper.xml" />
-		<mapper resource="mappers/userMapper.xml" />
-		<mapper resource="mappers/purchaseMapper.xml" />
+		<mapper resource="mapper/userMapper.xml" />
+		<mapper resource="mapper/fundMapper.xml" />
+		<mapper resource="mapper/purchaseMapper.xml" />
 	</mappers>
 </configuration>

@@ -1,18 +1,19 @@
-package com.sutanghome.dao.mappers;
+package com.sutanghome.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.sutanghome.dao.entities.User;
+import com.sutanghome.dao.model.UserQueryParam;
 
 @Mapper
 public interface UserMapper {
 	void insert(User entity);
 
-	User getByName(String name);
+	int count(User entity);
 
-	List<User> list(int skip, int take);
+	List<User> list(UserQueryParam param);
 
-	int count();
+	int update(User entity);
 }

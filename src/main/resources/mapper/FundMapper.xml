@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.matteh.dao.mapper.ConstantMapper">
+	<sql id="QUERY_WHERE">
+		<where>
+			deleted = false
+			<if test="id != null and id != ''">and id != #{id}</if>
+			<if test="type != null and type != ''">and type = #{type}</if>
+			<if test="name != null and name != ''">and name = #{name}</if>
+		</where>
+	</sql>
+	<sql id="QUERY_ORDER">
+		order by created desc
+	</sql>
+	<sql id="QUERY_PAGING">
+		<if test="skip >= 0 and take > 0">limit #{skip}, #{take}</if>
+	</sql>
+
+	<resultMap id="fundResultMap" type="Fund">
+		<result property="username" column="user_name" />
+		<result property="password" column="hashed_password" />
+	</resultMap>
+
+	<insert id="insert">
+		insert into constant (id, type, name)
+		values (#{id}, #{type}, #{name})
+	</insert>
+	<select id="count" resultType="java.lang.Integer">
+		select count(0)
+		from constant
+		<include refid="QUERY_WHERE" />
+	</select>
+	<select id="list" resultType="Constant">
+		select *
+		from constant
+		<include refid="QUERY_WHERE" />
+		<include refid="QUERY_ORDER" />
+		<include refid="QUERY_PAGING" />
+	</select>
+	<select id="listKV" resultType="KeyValue">
+		select id name, name value
+		from constant
+		<include refid="QUERY_WHERE" />
+		<include refid="QUERY_ORDER" />
+	</select>
+	<update id="update">
+		update constant
+		set type = #{type}, name = #{name}, updated = CURRENT_TIMESTAMP
+		where id = #{id} and deleted = false
+	</update>
+</mapper>

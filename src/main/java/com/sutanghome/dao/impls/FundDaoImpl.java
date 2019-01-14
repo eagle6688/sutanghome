@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sutanghome.dao.FundDao;
+import com.sutanghome.dao.FundMapper;
 import com.sutanghome.dao.entities.Fund;
-import com.sutanghome.dao.mappers.FundMapper;
 
 @Repository
 public class FundDaoImpl implements FundDao {

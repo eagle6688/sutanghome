@@ -27,4 +27,11 @@ public class EditUserParam extends AddUserParam {
 		entity.setId(id);
 		return entity;
 	}
+
+	@Override
+	public User toCountEntity() {
+		User entity = super.toCountEntity();
+		entity.setId(id);
+		return entity;
+	}
 }
