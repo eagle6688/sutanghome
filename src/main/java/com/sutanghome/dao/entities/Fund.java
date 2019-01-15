@@ -2,12 +2,14 @@ package com.sutanghome.dao.entities;
 
 import java.math.BigDecimal;
 
+import com.sutanghome.common.constant.PayMediumType;
+
 public class Fund extends BaseEntity {
 	private int fromUserId;
 	private int toUserId;
 	private BigDecimal quantity;
 	private String description;
-	private short medium;
+	private PayMediumType payMedium;
 
 	public int getFromUserId() {
 		return fromUserId;
@@ -41,11 +43,11 @@ public class Fund extends BaseEntity {
 		this.description = description;
 	}
 
-	public short getMedium() {
-		return medium;
+	public PayMediumType getPayMedium() {
+		return payMedium;
 	}
 
-	public void setMedium(short medium) {
-		this.medium = medium;
+	public void setPayMedium(PayMediumType payMedium) {
+		this.payMedium = payMedium;
 	}
 }

@@ -1,8 +1,8 @@
-package com.sutanghome.dao.model;
+package com.sutanghome.dao.model.fund;
 
-import com.sutanghome.dao.entities.User;
+import com.sutanghome.dao.entities.Fund;
 
-public class UserQueryModel extends User {
+public class FundQueryModel extends Fund {
 	private int skip;
 	private int take;
 

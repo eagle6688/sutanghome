@@ -15,6 +15,11 @@
 	<sql id="QUERY_PAGING">
 		<if test="skip >= 0 and take > 0">limit #{skip}, #{take}</if>
 	</sql>
+	
+	<resultMap id="fundResultMap" type="Fund">
+		<result property="username" column="user_name" />
+		<result property="password" column="hashed_password" />
+	</resultMap>
 
 	<insert id="insert">
 		insert into constant (id, type, name)

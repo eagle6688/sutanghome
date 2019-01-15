@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.matteh.dao.mapper.ConstantMapper">
+<mapper namespace="com.sutanghome.dao.FundMapper">
 	<sql id="QUERY_WHERE">
 		<where>
-			deleted = false
-			<if test="id != null and id != ''">and id != #{id}</if>
-			<if test="type != null and type != ''">and type = #{type}</if>
-			<if test="name != null and name != ''">and name = #{name}</if>
+			deleted = 0
+			<if test="id != null and id > 0">and id != #{id}</if>
+			<if test="from_user_id != null and from_user_id > 0">and from_user_id = #{fromUserId}</if>
+			<if test="to_user_id != null and to_user_id > 0">and to_user_id = #{toUserId}</if>
+			<if test="pay_medium != null and pay_medium > 0">and pay_medium = #{payMedium}</if>
 		</where>
 	</sql>
 	<sql id="QUERY_ORDER">
@@ -16,36 +17,29 @@
 		<if test="skip >= 0 and take > 0">limit #{skip}, #{take}</if>
 	</sql>
 
-	<resultMap id="fundResultMap" type="Fund">
-		<result property="username" column="user_name" />
-		<result property="password" column="hashed_password" />
-	</resultMap>
-
 	<insert id="insert">
-		insert into constant (id, type, name)
-		values (#{id}, #{type}, #{name})
+		insert into fund (from_user_id, to_user_id, quantity, description, pay_medium)
+		values (#{fromUserId}, #{toUserId}, #{quantity}, #{description}, #{payMedium})
 	</insert>
 	<select id="count" resultType="java.lang.Integer">
 		select count(0)
-		from constant
+		from fund
 		<include refid="QUERY_WHERE" />
 	</select>
-	<select id="list" resultType="Constant">
-		select *
-		from constant
+	<select id="list">
+		select f.id, fu.name fromUser, tu.name toUser, f.quantity, f.pay_medium payMedium, f.description, f.created, f.updated
+		from (
+		select * from fund
 		<include refid="QUERY_WHERE" />
+		) f
+		inner join user fu on f.from_user_id = fu.id and fu.deleted = 0
+		inner join user tu on f.to_user_id = tu.id and tu.deleted = 0
 		<include refid="QUERY_ORDER" />
 		<include refid="QUERY_PAGING" />
 	</select>
-	<select id="listKV" resultType="KeyValue">
-		select id name, name value
-		from constant
-		<include refid="QUERY_WHERE" />
-		<include refid="QUERY_ORDER" />
-	</select>
 	<update id="update">
-		update constant
-		set type = #{type}, name = #{name}, updated = CURRENT_TIMESTAMP
-		where id = #{id} and deleted = false
+		update fund
+		set from_user_id = #{fromUserId}, to_user_id = #{toUserId}, quantity = #{quantity}, description = #{description}, pay_medium = #{payMedium}, updated = CURRENT_TIMESTAMP
+		where id = #{id} and deleted = 0
 	</update>
 </mapper>

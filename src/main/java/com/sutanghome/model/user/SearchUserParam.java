@@ -3,7 +3,7 @@ package com.sutanghome.model.user;
 import org.apache.commons.lang3.StringUtils;
 
 import com.sutanghome.dao.entities.User;
-import com.sutanghome.dao.model.UserQueryModel;
+import com.sutanghome.dao.model.user.UserQueryModel;
 
 import devutility.internal.security.SHA256Utils;
 

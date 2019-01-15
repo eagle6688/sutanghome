@@ -5,20 +5,16 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.sutanghome.dao.entities.Fund;
+import com.sutanghome.dao.model.fund.FundDO;
+import com.sutanghome.dao.model.fund.FundQueryModel;
 
 @Mapper
 public interface FundMapper {
-	/**
-	 * Insert a new Fund object in database.
-	 * @param entity: Fund object.
-	 */
 	void insert(Fund entity);
-	
-	/**
-	 * List a page of data from Fund table.
-	 * @param skip: Skip number of records.
-	 * @param take: Take number of records.
-	 * @return List<Fund>
-	 */
-	List<Fund> list(int skip, int take);
+
+	int count(Fund entity);
+
+	List<FundDO> list(FundQueryModel model);
+
+	int update(Fund entity);
 }

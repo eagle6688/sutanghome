@@ -1,7 +1,5 @@
 package com.sutanghome.common.constant;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 public enum PayMediumType {
 	/**
 	 * 未知
@@ -33,7 +31,6 @@ public enum PayMediumType {
 		return value;
 	}
 
-	@JsonCreator
 	public static PayMediumType parse(int value) {
 		PayMediumType[] array = PayMediumType.values();
 

@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.sutanghome.dao.entities.User;
-import com.sutanghome.dao.model.UserQueryModel;
+import com.sutanghome.dao.model.user.UserQueryModel;
 
 import devutility.internal.models.KeyValue;
 
