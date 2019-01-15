@@ -9,8 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sutanghome.dao.UserMapper;
 import com.sutanghome.dao.entities.User;
 import com.sutanghome.model.user.AddUserParam;
+import com.sutanghome.model.user.EditUserParam;
 import com.sutanghome.model.user.SearchUserParam;
 import com.sutanghome.service.UserService;
+
+import devutility.internal.models.KeyValue;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,5 +35,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> pageData(SearchUserParam param) {
 		return userMapper.list(param.toQueryModel());
+	}
+
+	@Override
+	public List<KeyValue> listKV() {
+		return userMapper.listKV(null);
+	}
+
+	@Override
+	public boolean update(EditUserParam param) {
+		return userMapper.update(param.toEntity()) > 0;
 	}
 }
