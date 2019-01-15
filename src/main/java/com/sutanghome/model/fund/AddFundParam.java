@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sutanghome.common.constant.PayMediumType;
+import com.sutanghome.dao.entities.Fund;
 
 import devutility.external.javax.validation.annotation.Validation;
 
@@ -21,15 +23,15 @@ public class AddFundParam {
 	@Min(value = 1, message = "请输入正确的toUserId！")
 	private int toUserId;
 
-	@NotNull(message = "toUserId不能为空！")
+	@NotNull(message = "quantity不能为空！")
 	@Min(value = 1, message = "请输入正确的quantity！")
 	private BigDecimal quantity;
 
 	@Size(min = 0, max = 200, message = "description长度小于200！")
 	private String description;
 
-	@Min(value = 1, message = "请输入正确的medium！")
-	private short medium;
+	@NotNull(message = "medium不能为空！")
+	private PayMediumType medium;
 
 	public int getFromUserId() {
 		return fromUserId;
@@ -63,11 +65,25 @@ public class AddFundParam {
 		this.description = description;
 	}
 
-	public short getMedium() {
+	public PayMediumType getMedium() {
 		return medium;
 	}
 
-	public void setMedium(short medium) {
+	public void setMedium(PayMediumType medium) {
 		this.medium = medium;
+	}
+
+	public Fund toEntity() {
+		Fund entity = new Fund();
+		entity.setFromUserId(fromUserId);
+		entity.setToUserId(toUserId);
+		entity.setQuantity(quantity);
+
+		return entity;
+	}
+
+	public Fund toCountEntity() {
+		Fund entity = new Fund();
+		return entity;
 	}
 }
