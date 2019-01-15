@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.sutanghome.dao.entities.User;
-import com.sutanghome.dao.model.UserQueryParam;
+import com.sutanghome.dao.model.UserQueryModel;
 
 @Mapper
 public interface UserMapper {
@@ -13,7 +13,7 @@ public interface UserMapper {
 
 	int count(User entity);
 
-	List<User> list(UserQueryParam param);
+	List<User> list(UserQueryModel model);
 
 	int update(User entity);
 }

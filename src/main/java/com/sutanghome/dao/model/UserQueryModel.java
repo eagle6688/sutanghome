@@ -2,7 +2,7 @@ package com.sutanghome.dao.model;
 
 import com.sutanghome.dao.entities.User;
 
-public class UserQueryParam extends User {
+public class UserQueryModel extends User {
 	private int skip;
 	private int take;
 

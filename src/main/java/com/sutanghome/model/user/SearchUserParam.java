@@ -1,7 +1,11 @@
 package com.sutanghome.model.user;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.sutanghome.dao.entities.User;
-import com.sutanghome.dao.model.UserQueryParam;
+import com.sutanghome.dao.model.UserQueryModel;
+
+import devutility.internal.security.SHA256Utils;
 
 public class SearchUserParam extends User {
 	private int pageIndex;
@@ -23,11 +27,17 @@ public class SearchUserParam extends User {
 		this.pageSize = pageSize;
 	}
 
-	public UserQueryParam toQueryParam() {
-		UserQueryParam param = new UserQueryParam();
-		param.setCellphone(this.getCellphone());
-		param.setSkip((pageIndex - 1) * pageSize);
-		param.setTake(pageSize);
-		return param;
+	public UserQueryModel toQueryModel() {
+		UserQueryModel model = new UserQueryModel();
+		model.setName(this.getName());
+		model.setCellphone(this.getCellphone());
+		model.setSkip((pageIndex - 1) * pageSize);
+		model.setTake(pageSize);
+
+		if (StringUtils.isNotBlank(this.getPassword())) {
+			model.setPassword(SHA256Utils.encipherToHex(this.getPassword()));
+		}
+
+		return model;
 	}
 }

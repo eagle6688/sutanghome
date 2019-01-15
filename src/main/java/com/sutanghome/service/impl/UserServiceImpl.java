@@ -31,6 +31,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> pageData(SearchUserParam param) {
-		return null;
+		return userMapper.list(param.toQueryModel());
 	}
 }
