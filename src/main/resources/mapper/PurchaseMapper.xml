@@ -1,5 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sutanghome.dao.PurchaseMapper">
+	<sql id="QUERY_SELECT">
+		select p.id, u.name userName, p.channel, p.goal, p.cost, p.created, p.updated
+	</sql>
+	<sql id="QUERY_WHERE_CONDITION">
+		deleted = 0
+		<if test="userId != null and userId > 0">and userid = #{userId}</if>
+		<if test="channel != null">and channel = #{channel}</if>
+		<if test="goal != null">and goal = #{goal}</if>
+		<if test="cost > 0">and cost = #{cost}</if>
+	</sql>
+	<sql id="QUERY_WHERE_NOTEQUAL">
+		<where>
+			<include refid="QUERY_WHERE_CONDITION" />
+			<if test="id != null and id > 0">and id != #{id}</if>
+			<if test="time != null">and time = #{time}</if>
+		</where>
+	</sql>
+	<sql id="QUERY_WHERE">
+		<where>
+			<include refid="QUERY_WHERE_CONDITION" />
+			<if test="id != null and id > 0">and id = #{id}</if>
+			<if test="startTime != null">and time >= #{startTime}</if>
+			<if test="endTime != null">and time < #{endTime}</if>
+		</where>
+	</sql>
+	<sql id="QUERY_ORDER">
+		order by created desc
+	</sql>
+	<sql id="QUERY_PAGING">
+		<if test="skip >= 0 and take > 0">limit #{skip}, #{take}</if>
+	</sql>
 
+	<insert id="insert">
+		insert into purchase (userid, channel, goal, cost, time)
+		values (#{userId}, #{channel}, #{goal}, #{cost}, #{time})
+	</insert>
+	<select id="count" resultType="java.lang.Integer">
+		select count(0)
+		from purchase
+		<include refid="QUERY_WHERE_NOTEQUAL" />
+	</select>
+	<select id="get">
+		<include refid="QUERY_SELECT" />
+		from (
+		select * from purchase
+		<include refid="QUERY_WHERE" />
+		) p
+		inner join user u on p.userid = u.id and u.deleted = 0
+		limit 1
+	</select>
+	<select id="list">
+		<include refid="QUERY_SELECT" />
+		from (
+		select * from purchase
+		<include refid="QUERY_WHERE" />
+		) p
+		inner join user u on p.userid = u.id and u.deleted = 0
+		<include refid="QUERY_ORDER" />
+		<include refid="QUERY_PAGING" />
+	</select>
+	<update id="update">
+		update purchase
+		set userid = #{userId}, channel = #{channel}, goal = #{goal}, cost = #{cost}, time = #{time}, updated = CURRENT_TIMESTAMP
+		where id = #{id} and deleted = 0
+	</update>
 </mapper>

@@ -20,8 +20,8 @@
 	</sql>
 	<sql id="QUERY_WHERE">
 		<where>
-			<if test="id != null and id > 0">and id = #{id}</if>
 			<include refid="QUERY_WHERE_CONDITION" />
+			<if test="id != null and id > 0">and id = #{id}</if>
 		</where>
 	</sql>
 	<sql id="QUERY_ORDER">
