@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sutanghome.dao.FundMapper">
+	<sql id="QUERY_SELECT">
+		select f.id, fu.name fromUser, tu.name toUser, f.quantity, f.pay_medium payMedium, f.description, f.pay_time, f.created, f.updated
+	</sql>
+	<sql id="QUERY_WHERE_CONDITION">
+		deleted = 0
+		<if test="fromUserId != null and fromUserId > 0">and from_user_id = #{fromUserId}</if>
+		<if test="toUserId != null and toUserId > 0">and to_user_id = #{toUserId}</if>
+		<if test="payMedium != null">and pay_medium = #{payMedium}</if>
+		<if test="description != null and description != ''">and description = #{description}</if>
+		<if test="payTime != null">and pay_time = #{payTime}</if>
+	</sql>
+	<sql id="QUERY_WHERE_NOTEQUAL">
+		<where>
+			<if test="id != null and id > 0">and id != #{id}</if>
+			<include refid="QUERY_WHERE_CONDITION" />
+		</where>
+	</sql>
 	<sql id="QUERY_WHERE">
 		<where>
-			deleted = 0
-			<if test="id != null and id > 0">and id != #{id}</if>
-			<if test="from_user_id != null and from_user_id > 0">and from_user_id = #{fromUserId}</if>
-			<if test="to_user_id != null and to_user_id > 0">and to_user_id = #{toUserId}</if>
-			<if test="pay_medium != null and pay_medium > 0">and pay_medium = #{payMedium}</if>
+			<if test="id != null and id > 0">and id = #{id}</if>
+			<include refid="QUERY_WHERE_CONDITION" />
 		</where>
 	</sql>
 	<sql id="QUERY_ORDER">
@@ -18,16 +32,26 @@
 	</sql>
 
 	<insert id="insert">
-		insert into fund (from_user_id, to_user_id, quantity, description, pay_medium)
-		values (#{fromUserId}, #{toUserId}, #{quantity}, #{description}, #{payMedium})
+		insert into fund (from_user_id, to_user_id, quantity, description, pay_medium, pay_time)
+		values (#{fromUserId}, #{toUserId}, #{quantity}, #{description}, #{payMedium}, #{payTime})
 	</insert>
 	<select id="count" resultType="java.lang.Integer">
 		select count(0)
 		from fund
+		<include refid="QUERY_WHERE_NOTEQUAL" />
+	</select>
+	<select id="get">
+		<include refid="QUERY_SELECT" />
+		from (
+		select * from fund
 		<include refid="QUERY_WHERE" />
+		) f
+		inner join user fu on f.from_user_id = fu.id and fu.deleted = 0
+		inner join user tu on f.to_user_id = tu.id and tu.deleted = 0
+		limit 1
 	</select>
 	<select id="list">
-		select f.id, fu.name fromUser, tu.name toUser, f.quantity, f.pay_medium payMedium, f.description, f.created, f.updated
+		<include refid="QUERY_SELECT" />
 		from (
 		select * from fund
 		<include refid="QUERY_WHERE" />
@@ -39,7 +63,7 @@
 	</select>
 	<update id="update">
 		update fund
-		set from_user_id = #{fromUserId}, to_user_id = #{toUserId}, quantity = #{quantity}, description = #{description}, pay_medium = #{payMedium}, updated = CURRENT_TIMESTAMP
+		set from_user_id = #{fromUserId}, to_user_id = #{toUserId}, quantity = #{quantity}, description = #{description}, pay_medium = #{payMedium}, pay_time = #{payTime}, updated = CURRENT_TIMESTAMP
 		where id = #{id} and deleted = 0
 	</update>
 </mapper>

@@ -10,7 +10,7 @@
 		<package name="com.sutanghome.dao.model" />
 	</typeAliases>
 	<typeHandlers>
-		<typeHandler handler="org.apache.ibatis.type.EnumTypeHandler" javaType="com.sutanghome.common.constant.typehandlers.PayMediumTypeHandler" />
+		<typeHandler handler="com.sutanghome.common.constant.typehandlers.PayMediumTypeHandler" javaType="com.sutanghome.common.constant.PayMediumType" />
 	</typeHandlers>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" />

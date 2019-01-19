@@ -14,6 +14,8 @@ public interface FundMapper {
 
 	int count(Fund entity);
 
+	FundDO get(Fund model);
+
 	List<FundDO> list(FundQueryModel model);
 
 	int update(Fund entity);

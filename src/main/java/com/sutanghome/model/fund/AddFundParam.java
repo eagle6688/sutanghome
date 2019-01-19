@@ -1,9 +1,11 @@
 package com.sutanghome.model.fund;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -32,6 +34,9 @@ public class AddFundParam {
 
 	@NotNull(message = "medium不能为空！")
 	private PayMediumType medium;
+
+	@Past(message = "请输入正确的支付时间！")
+	private Date payTime;
 
 	public int getFromUserId() {
 		return fromUserId;
@@ -73,17 +78,31 @@ public class AddFundParam {
 		this.medium = medium;
 	}
 
+	public Date getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
+	}
+
 	public Fund toEntity() {
 		Fund entity = new Fund();
 		entity.setFromUserId(fromUserId);
 		entity.setToUserId(toUserId);
 		entity.setQuantity(quantity);
-
+		entity.setDescription(description);
+		entity.setPayMedium(medium);
+		entity.setPayTime(payTime);
 		return entity;
 	}
 
 	public Fund toCountEntity() {
 		Fund entity = new Fund();
+		entity.setFromUserId(fromUserId);
+		entity.setToUserId(toUserId);
+		entity.setDescription(description);
+		entity.setPayTime(payTime);
 		return entity;
 	}
 }

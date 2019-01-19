@@ -3,6 +3,7 @@ package com.sutanghome.model.fund;
 import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sutanghome.dao.entities.Fund;
 
 import devutility.external.javax.validation.annotation.Validation;
 
@@ -19,6 +20,18 @@ public class EditFundParam extends AddFundParam {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
+
+	@Override
+	public Fund toEntity() {
+		Fund entity = super.toEntity();
+		entity.setId(id);
+		return entity;
+	}
+
+	@Override
+	public Fund toCountEntity() {
+		Fund entity = toCountEntity();
+		entity.setId(id);
+		return entity;
+	}
 }

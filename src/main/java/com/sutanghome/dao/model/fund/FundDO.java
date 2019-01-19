@@ -12,6 +12,7 @@ public class FundDO {
 	private BigDecimal quantity;
 	private String description;
 	private PayMediumType payMedium;
+	private Date payTime;
 	private Date created;
 	private Date updated;
 
@@ -61,6 +62,14 @@ public class FundDO {
 
 	public void setPayMedium(PayMediumType payMedium) {
 		this.payMedium = payMedium;
+	}
+
+	public Date getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
 	}
 
 	public Date getCreated() {
