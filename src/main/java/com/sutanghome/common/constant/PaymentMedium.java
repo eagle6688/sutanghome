@@ -1,6 +1,6 @@
 package com.sutanghome.common.constant;
 
-public enum PayMediumType {
+public enum PaymentMedium {
 	/**
 	 * 未知
 	 */
@@ -23,7 +23,7 @@ public enum PayMediumType {
 
 	private int value;
 
-	private PayMediumType(int value) {
+	private PaymentMedium(int value) {
 		this.value = value;
 	}
 
@@ -31,8 +31,8 @@ public enum PayMediumType {
 		return value;
 	}
 
-	public static PayMediumType parse(int value) {
-		PayMediumType[] array = PayMediumType.values();
+	public static PaymentMedium parse(int value) {
+		PaymentMedium[] array = PaymentMedium.values();
 
 		for (int i = 0; i < array.length; i++) {
 			if (array[i].value == value) {
@@ -40,6 +40,6 @@ public enum PayMediumType {
 			}
 		}
 
-		return PayMediumType.CASH;
+		return PaymentMedium.CASH;
 	}
 }

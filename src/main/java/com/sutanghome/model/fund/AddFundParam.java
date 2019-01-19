@@ -9,7 +9,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sutanghome.common.constant.PayMediumType;
+import com.sutanghome.common.constant.PaymentMedium;
 import com.sutanghome.dao.entities.Fund;
 
 import devutility.external.javax.validation.annotation.Validation;
@@ -33,7 +33,7 @@ public class AddFundParam {
 	private String description;
 
 	@NotNull(message = "medium不能为空！")
-	private PayMediumType medium;
+	private PaymentMedium medium;
 
 	@Past(message = "请输入正确的支付时间！")
 	private Date payTime;
@@ -70,11 +70,11 @@ public class AddFundParam {
 		this.description = description;
 	}
 
-	public PayMediumType getMedium() {
+	public PaymentMedium getMedium() {
 		return medium;
 	}
 
-	public void setMedium(PayMediumType medium) {
+	public void setMedium(PaymentMedium medium) {
 		this.medium = medium;
 	}
 

@@ -10,7 +10,8 @@
 		<package name="com.sutanghome.dao.model" />
 	</typeAliases>
 	<typeHandlers>
-		<typeHandler handler="com.sutanghome.common.constant.typehandlers.PayMediumTypeHandler" javaType="com.sutanghome.common.constant.PayMediumType" />
+		<typeHandler handler="com.sutanghome.common.constant.typehandlers.PaymentTypeTypeHandler" javaType="com.sutanghome.common.constant.PaymentType" />
+		<typeHandler handler="com.sutanghome.common.constant.typehandlers.PaymentMediumTypeHandler" javaType="com.sutanghome.common.constant.PaymentMedium" />
 		<typeHandler handler="com.sutanghome.common.constant.typehandlers.ShoppingChannelTypeHandler" javaType="com.sutanghome.common.constant.ShoppingChannel" />
 	</typeHandlers>
 	<mappers>

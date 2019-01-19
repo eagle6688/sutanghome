@@ -3,7 +3,7 @@ package com.sutanghome.dao.model.fund;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.sutanghome.common.constant.PayMediumType;
+import com.sutanghome.common.constant.PaymentMedium;
 
 public class FundDO {
 	private int id;
@@ -11,7 +11,7 @@ public class FundDO {
 	private String toUser;
 	private BigDecimal quantity;
 	private String description;
-	private PayMediumType payMedium;
+	private PaymentMedium payMedium;
 	private Date payTime;
 	private Date created;
 	private Date updated;
@@ -56,11 +56,11 @@ public class FundDO {
 		this.description = description;
 	}
 
-	public PayMediumType getPayMedium() {
+	public PaymentMedium getPayMedium() {
 		return payMedium;
 	}
 
-	public void setPayMedium(PayMediumType payMedium) {
+	public void setPayMedium(PaymentMedium payMedium) {
 		this.payMedium = payMedium;
 	}
 
