@@ -2,17 +2,28 @@ package com.sutanghome.dao.entities;
 
 import java.math.BigDecimal;
 
+import com.sutanghome.common.constant.ShoppingChannel;
+
 public class Purchase extends BaseEntity {
-	private int userid;
+	private int userId;
+	private ShoppingChannel channel;
 	private short goal;
 	private BigDecimal cost;
 
-	public int getUserid() {
-		return userid;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public ShoppingChannel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(ShoppingChannel channel) {
+		this.channel = channel;
 	}
 
 	public short getGoal() {

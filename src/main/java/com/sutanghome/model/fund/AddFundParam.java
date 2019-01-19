@@ -29,7 +29,7 @@ public class AddFundParam {
 	@Min(value = 1, message = "请输入正确的quantity！")
 	private BigDecimal quantity;
 
-	@Size(min = 0, max = 200, message = "description长度小于200！")
+	@Size(min = 0, max = 200, message = "description的长度应小于200个字符！")
 	private String description;
 
 	@NotNull(message = "medium不能为空！")
