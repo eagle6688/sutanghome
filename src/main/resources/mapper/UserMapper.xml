@@ -4,13 +4,22 @@
 	<sql id="QUERY_SELECT">
 		select id, name, cellphone, created, updated
 	</sql>
+	<sql id="QUERY_WHERE_CONDITION">
+		deleted = 0
+		<if test="name != null and name != ''">and name = #{name}</if>
+		<if test="cellphone != null and cellphone != ''">and cellphone = #{cellphone}</if>
+		<if test="password != null and password != ''">and password = #{password}</if>
+	</sql>
+	<sql id="QUERY_WHERE_NOTEQUAL">
+		<where>
+			<include refid="QUERY_WHERE_CONDITION" />
+			<if test="id != null and id > 0">and id != #{id}</if>
+		</where>
+	</sql>
 	<sql id="QUERY_WHERE">
 		<where>
-			deleted = 0
-			<if test="id != null and id > 0">and id != #{id}</if>
-			<if test="name != null and name != ''">and name = #{name}</if>
-			<if test="cellphone != null and cellphone != ''">and cellphone = #{cellphone}</if>
-			<if test="password != null and password != ''">and password = #{password}</if>
+			<include refid="QUERY_WHERE_CONDITION" />
+			<if test="id != null and id > 0">and id = #{id}</if>
 		</where>
 	</sql>
 	<sql id="QUERY_ORDER">
@@ -27,7 +36,13 @@
 	<select id="count" resultType="java.lang.Integer">
 		select count(0)
 		from user
+		<include refid="QUERY_WHERE_NOTEQUAL" />
+	</select>
+	<select id="get">
+		<include refid="QUERY_SELECT" />
+		from user
 		<include refid="QUERY_WHERE" />
+		limit 1
 	</select>
 	<select id="list">
 		<include refid="QUERY_SELECT" />
