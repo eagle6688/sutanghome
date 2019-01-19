@@ -11,6 +11,7 @@
 	</typeAliases>
 	<typeHandlers>
 		<typeHandler handler="com.sutanghome.common.constant.typehandlers.PayMediumTypeHandler" javaType="com.sutanghome.common.constant.PayMediumType" />
+		<typeHandler handler="com.sutanghome.common.constant.typehandlers.ShoppingChannelTypeHandler" javaType="com.sutanghome.common.constant.ShoppingChannel" />
 	</typeHandlers>
 	<mappers>
 		<mapper resource="mapper/userMapper.xml" />
