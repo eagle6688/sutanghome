@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sutanghome.dao.FundMapper">
+<mapper namespace="com.sutanghome.dao.PaymentMapper">
 	<sql id="QUERY_SELECT">
-		select id, userid, type, cost, medium, time, description, created, updated
+		select p.id, u.name userName, p.type, p.cost, p.medium, p.time, p.description, p.created, p.updated
+		from (select * from payment
+		<include refid="QUERY_WHERE" />
+		) p
+		inner join user u on p.userid = u.id and u.deleted = 0
 	</sql>
 	<sql id="QUERY_WHERE_CONDITION">
 		deleted = 0
@@ -45,14 +49,10 @@
 	</select>
 	<select id="get">
 		<include refid="QUERY_SELECT" />
-		from payment
-		<include refid="QUERY_WHERE" />
 		limit 1
 	</select>
 	<select id="list">
 		<include refid="QUERY_SELECT" />
-		from payment
-		<include refid="QUERY_WHERE" />
 		<include refid="QUERY_ORDER" />
 		<include refid="QUERY_PAGING" />
 	</select>
