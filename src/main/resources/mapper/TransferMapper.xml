@@ -28,6 +28,7 @@
 	<sql id="QUERY_WHERE_TRANSFER">
 		<where>
 			deleted = 0
+			<if test="id > 0">and paymentid = #{id}</if>
 			<if test="transferId > 0">and id = #{transferId}</if>
 			<if test="toUserId > 0">and to_user_id = #{toUserId}</if>
 		</where>

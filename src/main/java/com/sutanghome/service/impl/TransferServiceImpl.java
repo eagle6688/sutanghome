@@ -65,6 +65,13 @@ public class TransferServiceImpl implements TransferService {
 		}
 
 		paymentMapper.update(payment);
+		TransferQueryModel transferQueryModel = param.toQueryModel();
 
+		if (transferMapper.count(transferQueryModel) > 0) {
+			throw new IllegalArgumentException("Transfer信息重复！");
+		}
+
+		Transfer transfer = param.toTransfer();
+		transferMapper.update(transfer);
 	}
 }

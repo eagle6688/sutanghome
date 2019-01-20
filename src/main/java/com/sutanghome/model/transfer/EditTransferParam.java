@@ -52,7 +52,8 @@ public class EditTransferParam extends AddTransferParam {
 	@Override
 	public TransferQueryModel toQueryModel() {
 		TransferQueryModel model = super.toQueryModel();
-
+		model.setId(getId());
+		model.setTransferId(getTransferId());
 		return model;
 	}
 }

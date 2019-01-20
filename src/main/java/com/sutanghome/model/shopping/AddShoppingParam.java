@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sutanghome.common.constant.ShoppingChannel;
 import com.sutanghome.dao.entities.Shopping;
+import com.sutanghome.dao.model.shopping.ShoppingQueryModel;
 import com.sutanghome.model.payment.AddPaymentParam;
 
 import devutility.external.javax.validation.annotation.Validation;
@@ -27,5 +28,11 @@ public class AddShoppingParam extends AddPaymentParam {
 		Shopping entity = new Shopping();
 		entity.setChannel(channel);
 		return entity;
+	}
+
+	public ShoppingQueryModel toQueryModel() {
+		ShoppingQueryModel model = new ShoppingQueryModel();
+		model.setChannel(channel);
+		return model;
 	}
 }

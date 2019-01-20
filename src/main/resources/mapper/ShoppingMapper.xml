@@ -27,6 +27,7 @@
 	<sql id="QUERY_WHERE_SHOPPING">
 		<where>
 			deleted = 0
+			<if test="id > 0">and paymentid = #{id}</if>
 			<if test="shoppingId != null">and id = #{shoppingId}</if>
 			<if test="channel != null">and channel = #{channel}</if>
 		</where>
