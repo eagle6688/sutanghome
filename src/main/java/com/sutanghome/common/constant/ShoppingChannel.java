@@ -1,5 +1,10 @@
 package com.sutanghome.common.constant;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import devutility.internal.models.KeyValue;
+
 public enum ShoppingChannel {
 	/**
 	 * 其他
@@ -14,7 +19,12 @@ public enum ShoppingChannel {
 	/**
 	 * 京东
 	 */
-	JD(2, "京东");
+	JD(2, "京东"),
+
+	/**
+	 * 唯品会
+	 */
+	WPH(3, "唯品会");
 
 	private int value;
 	private String name;
@@ -42,5 +52,16 @@ public enum ShoppingChannel {
 		}
 
 		return ShoppingChannel.UNKNOW;
+	}
+
+	public static List<KeyValue> listKV() {
+		List<KeyValue> list = new LinkedList<>();
+		ShoppingChannel[] array = ShoppingChannel.values();
+
+		for (ShoppingChannel item : array) {
+			list.add(new KeyValue(item.name(), item.getName()));
+		}
+
+		return list;
 	}
 }

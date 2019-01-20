@@ -1,5 +1,10 @@
 package com.sutanghome.common.constant;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import devutility.internal.models.KeyValue;
+
 public enum PaymentType {
 	/**
 	 * 未知
@@ -47,5 +52,16 @@ public enum PaymentType {
 		}
 
 		return PaymentType.UNKNOW;
+	}
+
+	public static List<KeyValue> listKV() {
+		List<KeyValue> list = new LinkedList<>();
+		PaymentType[] array = PaymentType.values();
+
+		for (PaymentType item : array) {
+			list.add(new KeyValue(item.name(), item.getName()));
+		}
+
+		return list;
 	}
 }
