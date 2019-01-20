@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sutanghome.dao.ShoppingMapper">
 	<sql id="QUERY_SELECT">
-		select p.id, s.id shoppingId, u.name userName, 'SHOPPING' type, s.channel, p.cost, p.medium, p.time, p.description, p.created, p.updated
+		select p.id paymentId, u.name userName, 'SHOPPING' type, s.channel, p.cost, p.medium, p.time, p.description, p.created, p.updated
 		from (select * from payment
 		<include refid="QUERY_WHERE_PAYMENT" />
 		) p
@@ -26,9 +26,7 @@
 	</sql>
 	<sql id="QUERY_WHERE_SHOPPING">
 		<where>
-			deleted = 0
-			<if test="id > 0">and paymentid = #{id}</if>
-			<if test="shoppingId != null">and id = #{shoppingId}</if>
+			<if test="id > 0">paymentid = #{id}</if>
 			<if test="channel != null">and channel = #{channel}</if>
 		</where>
 	</sql>
@@ -60,7 +58,7 @@
 	</select>
 	<update id="update">
 		update transfer
-		set channel = #{channel}, updated = CURRENT_TIMESTAMP
-		where id = #{id} and deleted = 0
+		set channel = #{channel}
+		where paymentid = #{id}
 	</update>
 </mapper>
