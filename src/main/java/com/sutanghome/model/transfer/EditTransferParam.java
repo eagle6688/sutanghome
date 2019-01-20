@@ -5,6 +5,7 @@ import javax.validation.constraints.Min;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sutanghome.dao.entities.Payment;
 import com.sutanghome.dao.entities.Transfer;
+import com.sutanghome.dao.model.transfer.TransferQueryModel;
 
 import devutility.external.javax.validation.annotation.Validation;
 
@@ -46,5 +47,12 @@ public class EditTransferParam extends AddTransferParam {
 		entity.setId(transferId);
 		entity.setPaymentId(id);
 		return entity;
+	}
+
+	@Override
+	public TransferQueryModel toQueryModel() {
+		TransferQueryModel model = super.toQueryModel();
+
+		return model;
 	}
 }

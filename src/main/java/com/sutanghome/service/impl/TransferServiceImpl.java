@@ -36,7 +36,11 @@ public class TransferServiceImpl implements TransferService {
 
 		paymentMapper.insert(payment);
 		TransferQueryModel transferQueryModel = param.toQueryModel();
+		transferQueryModel.setId(payment.getId());
 
+		/**
+		 * 判断当前Payment主键和toUserId是否存在。
+		 */
 		if (transferMapper.count(transferQueryModel) > 0) {
 			throw new IllegalArgumentException("Transfer已经存在！");
 		}
@@ -51,8 +55,16 @@ public class TransferServiceImpl implements TransferService {
 		return transferMapper.list(param.toQueryModel());
 	}
 
+	@Transactional
 	@Override
 	public void update(EditTransferParam param) {
+		Payment payment = param.toPayment();
+
+		if (paymentMapper.count(payment) > 0) {
+			throw new IllegalArgumentException("Payment信息重复！");
+		}
+
+		paymentMapper.update(payment);
 
 	}
 }
