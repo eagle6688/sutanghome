@@ -24,14 +24,16 @@ public class AddShoppingParam extends AddPaymentParam {
 		this.channel = channel;
 	}
 
-	public Shopping toShopping() {
+	public Shopping toShopping(int paymentId) {
 		Shopping entity = new Shopping();
+		entity.setPaymentId(paymentId);
 		entity.setChannel(channel);
 		return entity;
 	}
 
-	public ShoppingQueryModel toQueryModel() {
+	public ShoppingQueryModel toQueryModel(int paymentId) {
 		ShoppingQueryModel model = new ShoppingQueryModel();
+		model.setId(paymentId);
 		model.setChannel(channel);
 		return model;
 	}

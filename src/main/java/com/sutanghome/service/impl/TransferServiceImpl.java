@@ -35,8 +35,7 @@ public class TransferServiceImpl implements TransferService {
 		}
 
 		paymentMapper.insert(payment);
-		TransferQueryModel transferQueryModel = param.toQueryModel();
-		transferQueryModel.setId(payment.getId());
+		TransferQueryModel transferQueryModel = param.toQueryModel(payment.getId());
 
 		/**
 		 * 判断当前Payment主键和toUserId是否存在。

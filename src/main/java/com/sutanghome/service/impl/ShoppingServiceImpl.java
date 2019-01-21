@@ -35,8 +35,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 		}
 
 		paymentMapper.insert(payment);
-		ShoppingQueryModel shoppingQueryModel = param.toQueryModel();
-		shoppingQueryModel.setId(payment.getId());
+		ShoppingQueryModel shoppingQueryModel = param.toQueryModel(payment.getId());
 
 		/**
 		 * 判断当前Payment主键和channel是否存在。
@@ -45,8 +44,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 			throw new IllegalArgumentException("Payment信息重复！");
 		}
 
-		Shopping shopping = param.toShopping();
-		shopping.setPaymentId(payment.getId());
+		Shopping shopping = param.toShopping(payment.getId());
 		shoppingMapper.insert(shopping);
 	}
 
@@ -65,6 +63,12 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 		if (paymentMapper.update(payment) != 1) {
 			throw new IllegalArgumentException("Payment更新失败！");
+		}
+
+		Shopping shopping = param.toShopping();
+
+		if (shoppingMapper.update(shopping) != 1) {
+			throw new IllegalArgumentException("Shopping更新失败！");
 		}
 	}
 }

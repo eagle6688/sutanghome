@@ -30,8 +30,9 @@ public class AddTransferParam extends AddPaymentParam {
 		return entity;
 	}
 
-	public TransferQueryModel toQueryModel() {
+	public TransferQueryModel toQueryModel(int paymentId) {
 		TransferQueryModel model = new TransferQueryModel();
+		model.setId(paymentId);
 		model.setToUserId(toUserId);
 		return model;
 	}
