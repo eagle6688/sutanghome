@@ -57,6 +57,14 @@ public class ShoppingServiceImpl implements ShoppingService {
 
 	@Override
 	public void update(EditShoppingParam param) {
+		Payment payment = param.toPayment();
 
+		if (paymentMapper.count(payment) > 0) {
+			throw new IllegalArgumentException("Payment信息重复！");
+		}
+
+		if (paymentMapper.update(payment) != 1) {
+			throw new IllegalArgumentException("Payment更新失败！");
+		}
 	}
 }

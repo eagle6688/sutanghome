@@ -14,19 +14,8 @@ import devutility.external.javax.validation.annotation.Validation;
 @Validation
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchTransferParam extends SearchPaymentParam {
-	@Min(value = 0, message = "请输入正确的transferId！")
-	private int transferId;
-
 	@Min(value = 0, message = "请输入正确的toUserId！")
 	private int toUserId;
-
-	public int getTransferId() {
-		return transferId;
-	}
-
-	public void setTransferId(int transferId) {
-		this.transferId = transferId;
-	}
 
 	public int getToUserId() {
 		return toUserId;

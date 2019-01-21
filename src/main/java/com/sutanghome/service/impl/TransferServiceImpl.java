@@ -45,8 +45,7 @@ public class TransferServiceImpl implements TransferService {
 			throw new IllegalArgumentException("Transfer已经存在！");
 		}
 
-		Transfer transfer = param.toTransfer();
-		transfer.setPaymentId(payment.getId());
+		Transfer transfer = param.toTransfer(payment.getId());
 		transferMapper.insert(transfer);
 	}
 
@@ -64,14 +63,14 @@ public class TransferServiceImpl implements TransferService {
 			throw new IllegalArgumentException("Payment信息重复！");
 		}
 
-		paymentMapper.update(payment);
-		TransferQueryModel transferQueryModel = param.toQueryModel();
-
-		if (transferMapper.count(transferQueryModel) > 0) {
-			throw new IllegalArgumentException("Transfer信息重复！");
+		if (paymentMapper.update(payment) != 1) {
+			throw new IllegalArgumentException("Payment更新失败！");
 		}
 
 		Transfer transfer = param.toTransfer();
-		transferMapper.update(transfer);
+
+		if (transferMapper.update(transfer) != 1) {
+			throw new IllegalArgumentException("Transfer更新失败！");
+		}
 	}
 }

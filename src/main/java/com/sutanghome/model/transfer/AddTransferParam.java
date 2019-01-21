@@ -23,8 +23,9 @@ public class AddTransferParam extends AddPaymentParam {
 		this.toUserId = toUserId;
 	}
 
-	public Transfer toTransfer() {
+	public Transfer toTransfer(int paymentId) {
 		Transfer entity = new Transfer();
+		entity.setPaymentId(paymentId);
 		entity.setToUserId(toUserId);
 		return entity;
 	}

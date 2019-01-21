@@ -14,23 +14,12 @@ public class EditShoppingParam extends AddShoppingParam {
 	@Min(value = 1, message = "请输入正确的id！")
 	private int id;
 
-	@Min(value = 1, message = "请输入正确的shoppingId！")
-	private int shoppingId;
-
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getShoppingId() {
-		return shoppingId;
-	}
-
-	public void setShoppingId(int shoppingId) {
-		this.shoppingId = shoppingId;
 	}
 
 	@Override
