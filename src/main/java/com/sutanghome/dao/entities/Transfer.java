@@ -1,6 +1,6 @@
 package com.sutanghome.dao.entities;
 
-public class Transfer extends BaseEntity {
+public class Transfer {
 	private int paymentId;
 	private int toUserId;
 

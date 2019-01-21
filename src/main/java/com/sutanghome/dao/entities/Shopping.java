@@ -2,7 +2,7 @@ package com.sutanghome.dao.entities;
 
 import com.sutanghome.common.constant.ShoppingChannel;
 
-public class Shopping extends BaseEntity {
+public class Shopping {
 	private int paymentId;
 	private ShoppingChannel channel;
 

@@ -43,7 +43,6 @@ public class EditShoppingParam extends AddShoppingParam {
 	@Override
 	public Shopping toShopping() {
 		Shopping entity = super.toShopping();
-		entity.setId(shoppingId);
 		entity.setPaymentId(id);
 		return entity;
 	}

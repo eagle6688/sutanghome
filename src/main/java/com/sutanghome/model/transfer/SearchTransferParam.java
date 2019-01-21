@@ -40,7 +40,6 @@ public class SearchTransferParam extends SearchPaymentParam {
 		TransferQueryModel model = new TransferQueryModel();
 		PaymentQueryModel paymentQueryModel = super.toQueryModel();
 		BeanUtils.copyProperties(paymentQueryModel, model);
-		model.setTransferId(transferId);
 		model.setToUserId(toUserId);
 		return model;
 	}
