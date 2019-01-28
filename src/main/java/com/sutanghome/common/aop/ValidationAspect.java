@@ -15,7 +15,7 @@ import devutility.internal.models.OperationResult;
 @Order(3)
 @Component
 public class ValidationAspect {
-	@Around(value = "com.sutanghome.common.aop.Pointcuts.pointCutForAction()")
+	@Around(value = "com.sutanghome.common.aop.Pointcuts.pointcutForAction()")
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 		Object[] args = joinPoint.getArgs();
 

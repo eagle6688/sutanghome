@@ -20,8 +20,8 @@
 			<if test="cost > 0">and cost = #{cost}</if>
 			<if test="medium != null">and medium = #{medium}</if>
 			<if test="description != null and description != ''">and description = #{description}</if>
-			<if test="startTime != null">and time >= #{startTime}</if>
-			<if test="endTime != null">and time < #{endTime}</if>
+			<if test="startTime != null"><![CDATA[and time >= #{startTime}]]></if>
+			<if test="endTime != null"><![CDATA[and time < #{endTime}]]></if>
 		</where>
 	</sql>
 	<sql id="QUERY_WHERE_SHOPPING">
