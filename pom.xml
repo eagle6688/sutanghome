@@ -46,6 +46,13 @@
 		</dependency>
 		<!-- Spring End -->
 
+		<!-- Aop -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		<!-- Aop end -->
+
 		<!-- commons -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
