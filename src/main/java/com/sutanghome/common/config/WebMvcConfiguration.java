@@ -9,6 +9,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
+		registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/");
 		registry.addResourceHandler("/vendors/**").addResourceLocations("classpath:/vendors/");
 	}
 }

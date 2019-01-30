@@ -11,6 +11,6 @@ public class UserController extends BaseController {
 	@GetMapping("/index")
 	public String index(Model model) {
 		model.addAttribute("title", "User list!");
-		return "/user/index";
+		return "/user/index/index";
 	}
 }

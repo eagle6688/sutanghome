@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html th:replace="~{@{/layout/layout} :: layout(~{}, ~{::div-body}, ~{::script})}">
+
+<body>
+	<div th:fragment="div-body" class="row">
+		<div class="user-data col-md-12">
+			<h3 class="title-5 m-b-35" style="display: inline;">{{title}}</h3>
+			<div class="table-data__tool float-right">
+				<div class="table-data__tool-right">
+					{{>btn_add id="btn-add" modal-id="div-modal"}}
+				</div>
+			</div>
+			<div id="div-list" class="table-responsive table-responsive-data2">
+				<table class="table table-data2 table-hover">
+					<thead class="thead-light">
+						<tr>
+							<th>
+								<label class="au-checkbox">
+									<input type="checkbox">
+									<span class="au-checkmark"></span>
+								</label>
+							</th>
+							<th>name</th>
+							<th>cellphone</th>
+							<th>create time</th>
+							<th>last update</th>
+							<th>operation</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="item in data" class="tr-shadow">
+							<td>
+								<label class="au-checkbox">
+									<input type="checkbox">
+									<span class="au-checkmark"></span>
+								</label>
+							</td>
+							<td>{{item.name}}</td>
+							<td>{{item.cellphone}}</td>
+							<td>{{item.created}}</td>
+							<td>{{item.updated}}</td>
+							<td>
+								<div class="table-data-feature justify-content-md-center">
+									<button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+										<i class="zmdi zmdi-edit"></i>
+									</button>
+									<button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+										<i class="zmdi zmdi-delete"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="/templates/user/index/script/index.js"></script>
+</body>
+
+</html>
