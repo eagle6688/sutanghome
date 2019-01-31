@@ -1,5 +1,5 @@
 /**
- * @license form-modal.js v20181106
+ * @license FormModal.js v20190131
  * (c) Aldwin. https://github.com/eagle6688
  * License: MIT
  */
@@ -11,9 +11,15 @@
         modalSelector: null,
         formSelector: null,
         saveBtnSelector: null,
-        url: null,
+        addUrl: null,
+        editUrl: null,
         saveClick: function () {},
-        savedEvent: function (data, modal) {}
+        requested: function (data) {}
+    };
+
+    var saveType = {
+        add: 1,
+        edit: 2
     };
 
     function Plugin(options) {
@@ -31,6 +37,7 @@
         this.$modal = $(this.options.modalSelector);
         this.$form = $(this.options.formSelector);
         this.$saveBtn = $(this.options.saveBtnSelector);
+        this.saveType = saveType.add;
         this._bind();
     };
 
@@ -45,20 +52,19 @@
             return false;
         }
 
-        if (!this.options.saveBtnSelector) {
-            console.error('"saveBtnSelector" cannot be null!');
+        if (!this.options.addUrl) {
+            console.error('"addUrl" cannot be null!');
             return false;
         }
 
-        if (!this.options.url) {
-            var url = $(this.options.formSelector).attr('action');
+        if (!this.options.editUrl) {
+            console.error('"editUrl" cannot be null!');
+            return false;
+        }
 
-            if (!url) {
-                console.error('"url" cannot be null!');
-                return false;
-            }
-
-            this.options.url = url;
+        if (!this.options.saveBtnSelector) {
+            console.error('"saveBtnSelector" cannot be null!');
+            return false;
         }
 
         return true;
@@ -76,24 +82,28 @@
                 self.options.saveClick();
             }
 
-            self._ajax(self.$form.serialize());
+            var url = self._getUrl();
+            var data = self.$form.serialize();
+            self._ajax(url, data);
         });
     };
 
-    Plugin.prototype._ajax = function (data) {
-        var self = this;
-
-        $.post(this.options.url, data, function (data) {
-            self._savedEvent(data);
-        });
-    };
-
-    Plugin.prototype._savedEvent = function (data) {
-        var self = this;
-
-        if (this.options.savedEvent) {
-            this.options.savedEvent(data, self);
+    Plugin.prototype._getUrl = function () {
+        if (this.saveType == saveType.add) {
+            return this.options.addUrl;
         }
+
+        return this.options.editUrl;
+    };
+
+    Plugin.prototype._ajax = function (url, data) {
+        var self = this;
+
+        $.post(url, data, function (data) {
+            if (self.options.requested) {
+                self.options.requested(data, self);
+            }
+        });
     };
 
     Plugin.prototype.show = function () {
@@ -104,10 +114,18 @@
         this.$modal.modal('hide');
     };
 
-    Plugin.prototype.setUrl = function (url) {
-        if (url) {
-            this.options.url = url;
-        }
+    Plugin.prototype.setType = function (type) {
+        this.type = type;
+    };
+
+    Plugin.prototype.add = function () {
+        this.setType(saveType.add);
+        this.show();
+    };
+
+    Plugin.prototype.edit = function () {
+        this.setType(saveType.edit);
+        this.show();
     };
 
     window[pluginName] = Plugin;
