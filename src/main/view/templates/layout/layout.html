@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:fragment="layout(links, content, scripts)" xmlns:th="http://www.thymeleaf.org">
+<html th:fragment="layout(links, content, partials, scripts)" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
@@ -13,12 +13,18 @@
     <!-- Everybody else -->
     <link rel="icon" href="/resources/images/favicon.ico" />
     <link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/resources/styles/cooladmin-theme.css" />
     <link rel="stylesheet" href="/resources/styles/font-face.css" />
+    <link rel="stylesheet" href="/vendors/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="/vendors/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="/vendors/mdi-font/css/material-design-iconic-font.min.css" />
+    <link rel="stylesheet" href="/vendors/select2/select2.min.css" />
+    <link rel="stylesheet" href="/resources/styles/cooladmin-theme.css" />
     <th:block th:replace="${links}" />
     <script src="/resources/scripts/jquery-1.12.4.min.js"></script>
     <script src="/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="/resources/scripts/vue.min.js"></script>
+    <script src="/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/vendors/select2/select2.min.js"></script>
     <script src="/resources/scripts/jquery.pagination.js"></script>
     <script src="/resources/scripts/jquery.vue.helper.js"></script>
     <script src="/resources/scripts/FormModal.js"></script>
@@ -35,12 +41,13 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div th:replace="${content}"></div>
+                        <th:block th:replace="${content}" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <th:block th:replace="${partials}" />
     <th:block th:replace="${scripts}" />
 </body>
 
