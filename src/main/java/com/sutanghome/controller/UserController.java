@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sutanghome.dao.entities.User;
 import com.sutanghome.model.user.AddUserParam;
@@ -18,18 +19,19 @@ import devutility.internal.models.BaseResponse;
 import devutility.internal.models.OperationResult;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UserController extends BaseController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/index")
+	@GetMapping("index")
 	public String index(Model model) {
 		model.addAttribute("title", "User");
 		return "/user/index/index";
 	}
 
 	@GetMapping("list")
+	@ResponseBody
 	public BaseListResponse<User> list(int pageIndex, int pageSize) {
 		SearchUserParam param = new SearchUserParam();
 		param.setPageIndex(pageIndex);
@@ -37,17 +39,20 @@ public class UserController extends BaseController {
 		return userService.pageData(param);
 	}
 
-	@PostMapping("/add")
+	@PostMapping("add")
+	@ResponseBody
 	public OperationResult add(AddUserParam param) {
 		return userService.add(param);
 	}
 
 	@GetMapping("detail")
+	@ResponseBody
 	public BaseResponse<User> detail(int id) {
 		return userService.detail(id);
 	}
 
 	@PostMapping("edit")
+	@ResponseBody
 	public OperationResult edit(EditUserParam param) {
 		return userService.update(param);
 	}

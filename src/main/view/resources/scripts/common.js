@@ -37,7 +37,7 @@
             global: true,
             cache: false,
             error: function (xhr, status, error) {
-                console.log(status);
+                alert('系统错误，请联系管理员！');
             }
         });
     };

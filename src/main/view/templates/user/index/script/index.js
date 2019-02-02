@@ -15,12 +15,12 @@ page.init = function () {
 page.init_formModal = function () {
     this.formModal = new FormModal({
         modalSelector: '#div-modal',
-        formSelector: '#form-save',
+        formSelector: '#data-form',
         saveBtnSelector: '#div-modal-save',
         addUrl: this.url_add,
         editUrl: this.url_edit,
         requested: function (data, formModal) {
-            if (data.successful) {
+            if (data.succeeded) {
                 alert(data.message);
                 formModal.hide();
                 vueHelper.reload();

@@ -1,5 +1,5 @@
 /**
- * @license FormModal.js v20190131
+ * @license FormModal.js v20190202
  * (c) Aldwin. https://github.com/eagle6688
  * License: MIT
  */
@@ -112,6 +112,7 @@
 
     Plugin.prototype.hide = function () {
         this.$modal.modal('hide');
+        this.clear();
     };
 
     Plugin.prototype.setType = function (type) {
@@ -126,6 +127,12 @@
     Plugin.prototype.edit = function () {
         this.setType(saveType.edit);
         this.show();
+    };
+
+    Plugin.prototype.clear = function () {
+        this.$form.find(':input').each(function () {
+            $(this).val('');
+        });
     };
 
     window[pluginName] = Plugin;

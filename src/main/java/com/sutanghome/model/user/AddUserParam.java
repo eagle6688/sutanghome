@@ -56,7 +56,7 @@ public class AddUserParam {
 
 	public User toCountEntity() {
 		User entity = new User();
-		entity.setName(name);
+		entity.setCellphone(cellphone);
 		return entity;
 	}
 }
