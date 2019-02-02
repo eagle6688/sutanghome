@@ -1,5 +1,3 @@
-;
-
 var page = {
     url_list: '/user/list',
     url_add: '/user/add',
@@ -23,7 +21,7 @@ page.init_formModal = function () {
         editUrl: this.url_edit,
         requested: function (data, formModal) {
             if (data.successful) {
-                alert('Save completely!');
+                alert(data.message);
                 formModal.hide();
                 vueHelper.reload();
                 return;
@@ -59,7 +57,7 @@ page.bind_list = function () {
 
 page.bind_addBtn = function () {
     $('#btn-add').click(function () {
-        SaveForm.prev_add(formModal);
+        page.formModal.add();
     });
 };
 

@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sutanghome.dao.PaymentMapper;
-import com.sutanghome.dao.ShoppingMapper;
 import com.sutanghome.dao.entities.Payment;
 import com.sutanghome.dao.entities.Shopping;
+import com.sutanghome.dao.mapper.PaymentMapper;
+import com.sutanghome.dao.mapper.ShoppingMapper;
 import com.sutanghome.dao.model.shopping.ShoppingDO;
 import com.sutanghome.dao.model.shopping.ShoppingQueryModel;
 import com.sutanghome.model.shopping.AddShoppingParam;

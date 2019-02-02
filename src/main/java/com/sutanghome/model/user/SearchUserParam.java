@@ -27,6 +27,13 @@ public class SearchUserParam extends User {
 		this.pageSize = pageSize;
 	}
 
+	public User toCountEntity() {
+		User entity = new User();
+		entity.setName(this.getName());
+		entity.setCellphone(this.getCellphone());
+		return entity;
+	}
+
 	public UserQueryModel toQueryModel() {
 		UserQueryModel model = new UserQueryModel();
 		model.setName(this.getName());

@@ -17,7 +17,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 
 @Configuration
-@MapperScan(basePackages = { "com.sutanghome.dao" }, sqlSessionTemplateRef = "sqlSessionTemplate")
+@MapperScan(basePackages = { "com.sutanghome.dao.mapper" }, sqlSessionTemplateRef = "sqlSessionTemplate")
 public class DatabaseConfiguration {
 	@Bean
 	@ConfigurationProperties("mysql.sutanghome")

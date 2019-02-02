@@ -4,6 +4,7 @@
     common.init = function () {
         this.init_navigator_scrollbar();
         this.init_navigator_sublist();
+        common.init_ajax();
     };
 
     common.init_navigator_scrollbar = function () {
@@ -28,6 +29,16 @@
                     location.href = href;
                 }
             });
+        });
+    };
+
+    common.init_ajax = function () {
+        $.ajaxSetup({
+            global: true,
+            cache: false,
+            error: function (xhr, status, error) {
+                console.log(status);
+            }
         });
     };
 

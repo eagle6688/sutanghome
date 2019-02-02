@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sutanghome.dao.PaymentMapper;
-import com.sutanghome.dao.TransferMapper;
 import com.sutanghome.dao.entities.Payment;
 import com.sutanghome.dao.entities.Transfer;
+import com.sutanghome.dao.mapper.PaymentMapper;
+import com.sutanghome.dao.mapper.TransferMapper;
 import com.sutanghome.dao.model.transfer.TransferDO;
 import com.sutanghome.dao.model.transfer.TransferQueryModel;
 import com.sutanghome.model.transfer.AddTransferParam;

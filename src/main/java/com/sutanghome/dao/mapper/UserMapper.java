@@ -1,4 +1,4 @@
-package com.sutanghome.dao;
+package com.sutanghome.dao.mapper;
 
 import java.util.List;
 
