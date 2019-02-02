@@ -14,12 +14,6 @@
 				<table class="table table-data2 table-hover">
 					<thead class="thead-light">
 						<tr>
-							<th>
-								<label class="au-checkbox">
-									<input type="checkbox">
-									<span class="au-checkmark"></span>
-								</label>
-							</th>
 							<th>name</th>
 							<th>cellphone</th>
 							<th>create time</th>
@@ -29,22 +23,16 @@
 					</thead>
 					<tbody>
 						<tr v-for="item in data" class="tr-shadow">
-							<td>
-								<label class="au-checkbox">
-									<input type="checkbox">
-									<span class="au-checkmark"></span>
-								</label>
-							</td>
 							<td>{{item.name}}</td>
 							<td>{{item.cellphone}}</td>
 							<td>{{item.created}}</td>
 							<td>{{item.updated}}</td>
 							<td>
 								<div class="table-data-feature justify-content-md-center">
-									<button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+									<button class="item" data-toggle="tooltip" data-placement="top" title="Edit" v-on:click="page.edit(item.id)">
 										<i class="zmdi zmdi-edit"></i>
 									</button>
-									<button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+									<button class="item" data-toggle="tooltip" data-placement="top" title="Delete" v-on:click="page.delete(item.id)">
 										<i class="zmdi zmdi-delete"></i>
 									</button>
 								</div>
@@ -61,6 +49,7 @@
 	<section th:fragment="section-partial">
 		<div th:replace="~{@{/partial/modal} :: modal('div-modal', 'Save User', ~{@{/user/index/partial/data-form}::#data-form})}"></div>
 	</section>
+	<script src="/templates/user/index/script/data-form.js"></script>
 	<script src="/templates/user/index/script/index.js"></script>
 </body>
 

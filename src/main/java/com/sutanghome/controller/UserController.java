@@ -56,4 +56,10 @@ public class UserController extends BaseController {
 	public OperationResult edit(EditUserParam param) {
 		return userService.update(param);
 	}
+
+	@GetMapping("delete")
+	@ResponseBody
+	public OperationResult delete(int id) {
+		return userService.delete(id);
+	}
 }

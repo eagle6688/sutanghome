@@ -1,40 +1,21 @@
 var page = {
     url_list: '/user/list',
-    url_add: '/user/add',
-    url_edit: '/user/edit',
+    url_detail: '/user/detail',
+    url_delete: '/user/delete',
+    $list: $('#div-list'),
     vueHelper: null,
     formModal: null
 };
 
 page.init = function () {
     selector.init();
-    this.init_formModal();
+    this.formModal = dataForm.init();
     this.bind();
 };
 
-page.init_formModal = function () {
-    this.formModal = new FormModal({
-        modalSelector: '#div-modal',
-        formSelector: '#data-form',
-        saveBtnSelector: '#div-modal-save',
-        addUrl: this.url_add,
-        editUrl: this.url_edit,
-        requested: function (data, formModal) {
-            if (data.succeeded) {
-                alert(data.message);
-                formModal.hide();
-                vueHelper.reload();
-                return;
-            }
-
-            alert(data.message);
-        }
-    });
-};
-
 page.bind = function () {
-    page.bind_list();
-    page.bind_addBtn();
+    this.bind_list();
+    this.bind_addBtn();
 };
 
 page.bind_list = function () {
@@ -47,7 +28,7 @@ page.bind_list = function () {
         }
     });
 
-    vueHelper = $('#div-list').vueHelper({
+    vueHelper = this.$list.vueHelper({
         url: this.url_list,
         onReload: function (data) {
             $('#pagination').data('pagination').changeTotalRecords(data.count);
@@ -58,6 +39,29 @@ page.bind_list = function () {
 page.bind_addBtn = function () {
     $('#btn-add').click(function () {
         page.formModal.add();
+    });
+};
+
+page.edit = function (id) {
+    var url = devutility.url.addParam(page.url_detail, 'id', id);
+
+    $.getJSON(url, function (result) {
+        dataForm.set(result.data);
+        page.formModal.edit();
+    });
+};
+
+page.delete = function (id) {
+    var url = devutility.url.addParam(page.url_delete, 'id', id);
+
+    confirm('您确定要删除该用户吗？', function () {
+        $.getJSON(url, function (result) {
+            alert(result.message);
+
+            if (result.succeeded) {
+                vueHelper.reload();
+            }
+        });
     });
 };
 

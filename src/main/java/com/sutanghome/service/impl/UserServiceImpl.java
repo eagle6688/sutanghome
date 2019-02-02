@@ -87,4 +87,17 @@ public class UserServiceImpl implements UserService {
 
 		return result;
 	}
+
+	@Override
+	public OperationResult delete(int id) {
+		OperationResult result = new OperationResult();
+
+		if (userMapper.delete(id) == 1) {
+			result.setMessage("删除用户成功！");
+		} else {
+			result.setErrorMessage("删除用户失败！");
+		}
+
+		return result;
+	}
 }

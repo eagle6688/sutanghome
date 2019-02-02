@@ -17,7 +17,7 @@
         requested: function (data) {}
     };
 
-    var saveType = {
+    var operationType = {
         add: 1,
         edit: 2
     };
@@ -37,7 +37,7 @@
         this.$modal = $(this.options.modalSelector);
         this.$form = $(this.options.formSelector);
         this.$saveBtn = $(this.options.saveBtnSelector);
-        this.saveType = saveType.add;
+        this.operationType = operationType.add;
         this._bind();
     };
 
@@ -89,7 +89,7 @@
     };
 
     Plugin.prototype._getUrl = function () {
-        if (this.saveType == saveType.add) {
+        if (this.operationType == operationType.add) {
             return this.options.addUrl;
         }
 
@@ -115,17 +115,17 @@
         this.clear();
     };
 
-    Plugin.prototype.setType = function (type) {
-        this.type = type;
+    Plugin.prototype.setOperationType = function (type) {
+        this.operationType = type;
     };
 
     Plugin.prototype.add = function () {
-        this.setType(saveType.add);
+        this.setOperationType(operationType.add);
         this.show();
     };
 
     Plugin.prototype.edit = function () {
-        this.setType(saveType.edit);
+        this.setOperationType(operationType.edit);
         this.show();
     };
 

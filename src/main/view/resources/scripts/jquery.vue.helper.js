@@ -1,8 +1,9 @@
 /**
- * @license jquery.vue.helper.js v20171227
- * (c) 2010-2017 Aldwin. https://github.com/eagle6688
+ * @license jquery.vue.helper.js v20190202
+ * (c) 2010-2019 Aldwin. https://github.com/eagle6688
  * License: MIT
  */
+
 (function ($, window, document, undefined) {
     var pluginName = 'vueHelper';
 
@@ -15,9 +16,9 @@
         pageSize: 10,
         autoLoad: true,
         loadingDom: '', //Dom displays when data are loading.
-        beforeLoadData: function (data) { },
-        afterLoadData: function (data) { },
-        onReload: function (data) { }
+        beforeLoadData: function (data) {},
+        afterLoadData: function (data) {},
+        onReload: function (data) {}
     };
 
     var events = {
@@ -72,8 +73,7 @@
         if (this.options.viewModel) {
             this._loadViewModel(this.options.viewModel);
             this.options.viewModel = null;
-        }
-        else if (this.options.url) {
+        } else if (this.options.url) {
             this._requestData();
         }
     };
@@ -168,8 +168,7 @@
     var getPageUrl = function (url, pageIndex, pageSize) {
         if (url.indexOf('?') > 0) {
             url += '&';
-        }
-        else {
+        } else {
             url += '?';
         }
 
@@ -221,7 +220,7 @@
         }
 
         function toObject(vueObject) {
-            var obj = new Object();
+            var obj = new object();
 
             for (var index in vueObject) {
                 var item = restore(vueObject[index]);
@@ -251,20 +250,27 @@
     Plugin.prototype.reload = function () {
         this.event = events.reload;
 
-        switch (arguments.length) {
-            case 1:
-                this._reloadOptions(arguments[0]);
-                break;
+        if (arguments.length === 1) {
+            var type = typeof arguments[0];
 
-            case 2:
-                this._reloadOption(arguments[0], arguments[1]);
-                break;
+            switch (type) {
+                case 'number':
+                    this.pageIndex = arguments[0];
+                    break;
 
-            default:
-                break;
+                case 'object':
+                    this._reloadOptions(arguments[0]);
+                    break;
+
+                default:
+                    break;
+            }
         }
 
-        this.pageIndex = 1;
+        if (arguments.length === 2) {
+            this._reloadOption(arguments[0], arguments[1]);
+        }
+
         this._loadData();
     };
 

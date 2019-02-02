@@ -22,4 +22,6 @@ public interface UserMapper {
 	List<KeyValue> listKV(UserQueryModel model);
 
 	int update(User entity);
+
+	int delete(int id);
 }

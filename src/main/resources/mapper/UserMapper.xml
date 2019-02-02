@@ -38,7 +38,7 @@
 		from user
 		<include refid="QUERY_WHERE_NOTEQUAL" />
 	</select>
-	<select id="get">
+	<select id="get" resultType="User">
 		<include refid="QUERY_SELECT" />
 		from user
 		<include refid="QUERY_WHERE" />
@@ -60,6 +60,11 @@
 	<update id="update">
 		update user
 		set name = #{name}, cellphone = #{cellphone}, password = #{password}, updated = CURRENT_TIMESTAMP
+		where id = #{id} and deleted = 0
+	</update>
+	<update id="delete">
+		update user
+		set deleted = 1, updated = CURRENT_TIMESTAMP
 		where id = #{id} and deleted = 0
 	</update>
 </mapper>

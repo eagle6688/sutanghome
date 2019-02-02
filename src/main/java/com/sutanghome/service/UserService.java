@@ -22,4 +22,6 @@ public interface UserService {
 	BaseResponse<User> detail(int id);
 
 	OperationResult update(EditUserParam param);
+
+	OperationResult delete(int id);
 }
