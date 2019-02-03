@@ -14,6 +14,8 @@ public interface PaymentMapper {
 
 	int count(Payment entity);
 
+	int count(PaymentQueryModel model);
+
 	PaymentDO get(PaymentQueryModel model);
 
 	List<PaymentDO> list(PaymentQueryModel model);

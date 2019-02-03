@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-</head>
+<html th:replace="~{@{/layout/layout} :: layout(~{}, ~{::div-body}, ~{::section-partial}, ~{::script})}">
 
 <body>
-
+    <div th:fragment="div-body" class="row">
+        <div class="user-data col-md-12">
+            <h3 class="title-5 m-b-35" th:text="${title}"></h3>
+            <div id="div-list" class="table-responsive table-responsive-data2">
+                <table class="table table-data2 table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>user name</th>
+                            <th>payment type</th>
+                            <th>cost</th>
+                            <th>payment medium</th>
+                            <th>payment time</th>
+                            <th>description</th>
+                            <th>create time</th>
+                            <th>last update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in data" class="tr-shadow">
+                            <td>{{item.userName}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.cost}}</td>
+                            <td>{{item.medium}}</td>
+                            <td>{{item.time}}</td>
+                            <td>{{item.description}}</td>
+                            <td>{{item.created}}</td>
+                            <td>{{item.updated}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div th:fragment="div-body" class="row">
+        <div th:replace="~{@{/partial/pagination} :: pagination('pagination')}"></div>
+    </div>
+    <section th:fragment="section-partial">
+        <div th:replace="~{@{/partial/modal} :: modal('div-modal', 'Save User', ~{@{/payment/partial/data-form}::#data-form})}"></div>
+    </section>
+    <script src="/templates/payment/script/data-form.js"></script>
+    <script src="/templates/payment/script/index.js"></script>
 </body>
 
 </html>

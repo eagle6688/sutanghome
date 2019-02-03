@@ -1,3 +1,7 @@
-<button th:fragment="btn-add(id)" th:id="${id}" class="au-btn au-btn-icon btn btn-secondary au-btn--small" data-toggle="modal">
-    <i class="zmdi zmdi-plus"></i>add item
-</button>
+<div th:fragment="btn-add(id)" class="table-data__tool float-right">
+    <div class="table-data__tool-right">
+        <button th:id="${id}" class="au-btn au-btn-icon btn btn-secondary au-btn--small" data-toggle="modal">
+            <i class="zmdi zmdi-plus"></i>add item
+        </button>
+    </div>
+</div>
