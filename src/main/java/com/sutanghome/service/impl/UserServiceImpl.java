@@ -72,6 +72,7 @@ public class UserServiceImpl implements UserService {
 		return response;
 	}
 
+	@Transactional
 	@Override
 	public OperationResult update(EditUserParam param) {
 		OperationResult result = new OperationResult();

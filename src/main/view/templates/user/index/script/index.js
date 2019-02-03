@@ -54,7 +54,7 @@ page.edit = function (id) {
 page.delete = function (id) {
     var url = devutility.url.addParam(page.url_delete, 'id', id);
 
-    confirm('您确定要删除该用户吗？', function () {
+    if (confirm('您确定要删除该用户吗？')) {
         $.getJSON(url, function (result) {
             alert(result.message);
 
@@ -62,7 +62,7 @@ page.delete = function (id) {
                 vueHelper.reload();
             }
         });
-    });
+    }
 };
 
 page.init();

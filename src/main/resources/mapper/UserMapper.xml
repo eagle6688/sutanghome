@@ -59,7 +59,12 @@
 	</select>
 	<update id="update">
 		update user
-		set name = #{name}, cellphone = #{cellphone}, password = #{password}, updated = CURRENT_TIMESTAMP
+		<set>
+			updated = CURRENT_TIMESTAMP,
+			<if test="name != null">name=#{name},</if>
+			<if test="cellphone != null">cellphone=#{cellphone},</if>
+			<if test="password != null">password=#{password}</if>
+		</set>
 		where id = #{id} and deleted = 0
 	</update>
 	<update id="delete">

@@ -22,6 +22,7 @@ dataForm.init = function () {
 };
 
 dataForm.set = function (model) {
+    $('#txt-id').val(model.id);
     $('#txt-name').val(model.name);
     $('#txt-cellphone').val(model.cellphone);
 };

@@ -1,8 +1,10 @@
 package com.sutanghome.model.user;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+// import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sutanghome.dao.entities.User;
@@ -13,13 +15,13 @@ import devutility.internal.security.SHA256Utils;
 @Validation
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddUserParam {
-	@NotNull(message = "姓名不能为空！")
+	@NotNull(message = "请输入姓名！")
 	private String name;
 
-	@Pattern(regexp = "^1(3|4|5|7|8)\\d{9}$", message = "手机号码格式错误！")
+	//@Pattern(regexp = "^1(3|4|5|7|8)\\d{9}$", message = "请输入正确格式的手机号码！")
 	private String cellphone;
 
-	@Size(max = 128, message = "请输入密码！")
+	@Size(max = 36, message = "请输入6-36位密码！")
 	private String password;
 
 	public String getName() {
@@ -46,17 +48,21 @@ public class AddUserParam {
 		this.password = password;
 	}
 
+	public User toCountEntity() {
+		User entity = new User();
+		entity.setName(name);
+		return entity;
+	}
+
 	public User toEntity() {
 		User entity = new User();
 		entity.setName(name);
 		entity.setCellphone(cellphone);
-		entity.setPassword(SHA256Utils.encipherToHex(password));
-		return entity;
-	}
 
-	public User toCountEntity() {
-		User entity = new User();
-		entity.setCellphone(cellphone);
+		if (StringUtils.isNotBlank(password)) {
+			entity.setPassword(SHA256Utils.encipherToHex(password));
+		}
+
 		return entity;
 	}
 }
