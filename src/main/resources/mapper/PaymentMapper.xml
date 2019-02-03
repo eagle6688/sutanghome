@@ -51,7 +51,7 @@
 		<include refid="QUERY_SELECT" />
 		limit 1
 	</select>
-	<select id="list" resultType="User">
+	<select id="list" resultType="PaymentDO">
 		<include refid="QUERY_SELECT" />
 		<include refid="QUERY_ORDER" />
 		<include refid="QUERY_PAGING" />

@@ -43,10 +43,10 @@
 		<div th:replace="~{@{/partial/pagination} :: pagination('pagination')}"></div>
 	</div>
 	<section th:fragment="section-partial">
-		<div th:replace="~{@{/partial/modal} :: modal('div-modal', 'Save User', ~{@{/user/index/partial/data-form}::#data-form})}"></div>
+		<div th:replace="~{@{/partial/modal} :: modal('div-modal', 'Save User', ~{@{/user/partial/data-form}::#data-form})}"></div>
 	</section>
-	<script src="/templates/user/index/script/data-form.js"></script>
-	<script src="/templates/user/index/script/index.js"></script>
+	<script src="/templates/user/script/data-form.js"></script>
+	<script src="/templates/user/script/index.js"></script>
 </body>
 
 </html>

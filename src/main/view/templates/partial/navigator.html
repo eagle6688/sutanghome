@@ -7,14 +7,25 @@
     <div id="div-scrollbar" class="menu-sidebar__content">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
-                <li>
-                    <a href="/payment/index">
-                        <i class="fas fa-home"></i>Payment
+                <li class="has-sub">
+                    <a class="js-arrow" href="javascript:void(0);">
+                        <i class="fas fa-home"></i>支付
                     </a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="/payment/index">支付</a>
+                        </li>
+                        <li>
+                            <a href="/shopping/index">购物</a>
+                        </li>
+                        <li>
+                            <a href="/transfer/index">转账</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="/user/index">
-                        <i class="fas fa-users"></i>User
+                        <i class="fas fa-users"></i>用户
                     </a>
                 </li>
             </ul>

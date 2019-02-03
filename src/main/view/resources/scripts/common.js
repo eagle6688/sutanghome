@@ -42,5 +42,7 @@
         });
     };
 
-    common.init();
+    $(document).ready(function () {
+        common.init();
+    });
 })();

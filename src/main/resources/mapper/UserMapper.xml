@@ -44,7 +44,7 @@
 		<include refid="QUERY_WHERE" />
 		limit 1
 	</select>
-	<select id="list" resultType="PaymentDO">
+	<select id="list" resultType="User">
 		<include refid="QUERY_SELECT" />
 		from user
 		<include refid="QUERY_WHERE" />
