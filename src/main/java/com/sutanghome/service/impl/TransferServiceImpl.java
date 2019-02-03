@@ -1,7 +1,5 @@
 package com.sutanghome.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +14,8 @@ import com.sutanghome.model.transfer.AddTransferParam;
 import com.sutanghome.model.transfer.EditTransferParam;
 import com.sutanghome.model.transfer.SearchTransferParam;
 import com.sutanghome.service.TransferService;
+
+import devutility.internal.models.BaseListResponse;
 
 @Service
 public class TransferServiceImpl implements TransferService {
@@ -49,8 +49,12 @@ public class TransferServiceImpl implements TransferService {
 	}
 
 	@Override
-	public List<TransferDO> pageData(SearchTransferParam param) {
-		return transferMapper.list(param.toQueryModel());
+	public BaseListResponse<TransferDO> pageData(SearchTransferParam param) {
+		BaseListResponse<TransferDO> response = new BaseListResponse<>();
+		TransferQueryModel queryModel = param.toQueryModel();
+		response.setCount(transferMapper.count(queryModel));
+		response.setData(transferMapper.list(queryModel));
+		return response;
 	}
 
 	@Transactional

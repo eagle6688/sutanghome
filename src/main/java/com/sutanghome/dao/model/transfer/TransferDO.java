@@ -4,7 +4,7 @@ import com.sutanghome.dao.model.payment.PaymentDO;
 
 public class TransferDO extends PaymentDO {
 	private int transferId;
-	private String fromUser;
+	private String toUser;
 
 	public int getTransferId() {
 		return transferId;
@@ -14,11 +14,11 @@ public class TransferDO extends PaymentDO {
 		this.transferId = transferId;
 	}
 
-	public String getFromUser() {
-		return fromUser;
+	public String getToUser() {
+		return toUser;
 	}
 
-	public void setFromUser(String fromUser) {
-		this.fromUser = fromUser;
+	public void setToUser(String toUser) {
+		this.toUser = toUser;
 	}
 }
