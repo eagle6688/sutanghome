@@ -1,14 +1,14 @@
 package com.sutanghome.model.user;
 
 import javax.validation.constraints.NotNull;
-// import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sutanghome.dao.entities.User;
 
+import devutility.external.javax.validation.annotation.PatternIfNotNull;
+import devutility.external.javax.validation.annotation.SizeIfNotNull;
 import devutility.external.javax.validation.annotation.Validation;
 import devutility.internal.security.SHA256Utils;
 
@@ -18,10 +18,10 @@ public class AddUserParam {
 	@NotNull(message = "请输入姓名！")
 	private String name;
 
-	//@Pattern(regexp = "^1(3|4|5|7|8)\\d{9}$", message = "请输入正确格式的手机号码！")
+	@PatternIfNotNull(regexp = "^1(3|4|5|7|8)\\d{9}$", message = "请输入正确格式的手机号码！")
 	private String cellphone;
 
-	@Size(max = 36, message = "请输入6-36位密码！")
+	@SizeIfNotNull(min = 6, max = 36, message = "请输入6-36位密码！")
 	private String password;
 
 	public String getName() {
