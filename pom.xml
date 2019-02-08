@@ -91,7 +91,7 @@
 		<dependency>
 			<groupId>com.github.eagle6688</groupId>
 			<artifactId>devutility.internal</artifactId>
-			<version>1.2.10</version>
+			<version>1.2.11</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.eagle6688</groupId>
@@ -106,7 +106,7 @@
 		<dependency>
 			<groupId>com.github.eagle6688</groupId>
 			<artifactId>devutility.external.servlet</artifactId>
-			<version>4.0.5</version>
+			<version>4.0.6</version>
 		</dependency>
 		<!-- devutility end -->
 
