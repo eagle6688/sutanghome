@@ -4,7 +4,7 @@ public class SystemConfig {
 	/**
 	 * Url for login page.
 	 */
-	public final static String URL_LOGIN = "/log/index";
+	public final static String URL_LOGIN = "/sign/index";
 
 	/**
 	 * Cookie name of JSESSIONID.

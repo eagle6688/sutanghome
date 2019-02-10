@@ -1,0 +1,14 @@
+<head th:fragment="head-resource(links, scripts)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta itemprop="pagename" content="{{title}}">
+    <title th:text="${title}"></title>
+    <!-- IE6-10 -->
+    <link rel="shortcut icon" href="/resources/images/favicon.ico" />
+    <!-- Everybody else -->
+    <link rel="icon" href="/resources/images/favicon.ico" />
+    <th:block th:replace="${links}" />
+    <th:block th:replace="${scripts}" />
+</head>

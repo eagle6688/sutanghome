@@ -13,15 +13,15 @@ import devutility.internal.annotations.PublicAction;
 import devutility.internal.models.OperationResult;
 
 @Controller
-@RequestMapping("log")
-public class LogController extends BaseController {
+@RequestMapping("sign")
+public class SignController extends BaseController {
 	@Autowired
 	private AccountCache accountCache;
 
 	@PublicAction
 	@GetMapping("index")
 	public String index() {
-		return "/login/index";
+		return "/sign/index";
 	}
 
 	@GetMapping("in")
