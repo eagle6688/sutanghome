@@ -21,8 +21,12 @@ public abstract class BaseController {
 	@Autowired
 	private AccountCache accountCache;
 
+	protected String sessionId() {
+		return CookieUtils.getValue(request, SystemConfig.COOKIE_JSESSIONID);
+	}
+
 	protected Account account() {
-		String sessionId = CookieUtils.getValue(request, SystemConfig.COOKIE_JSESSIONID);
+		String sessionId = sessionId();
 		return accountCache.get(sessionId);
 	}
 }

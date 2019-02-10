@@ -11,8 +11,8 @@ import devutility.internal.cache.MemoryCache;
 @Component
 public class AccountCacheImpl implements AccountCache {
 	@Override
-	public void set(String sessionId, Account account) {
-		String key = SystemConfig.getCacheNameForAccount(sessionId);
+	public void set(Account account) {
+		String key = SystemConfig.getCacheNameForAccount(account.getSessionId());
 		MemoryCache.set(key, account, SystemConfig.COOKIE_JSESSIONID_EXPIRESECONDS);
 	}
 

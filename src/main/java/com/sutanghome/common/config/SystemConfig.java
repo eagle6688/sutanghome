@@ -7,6 +7,11 @@ public class SystemConfig {
 	public final static String URL_LOGIN = "/sign/index";
 
 	/**
+	 * Url for default page.
+	 */
+	public final static String URL_DEFAULT = "/user/index";
+
+	/**
 	 * Cookie name of JSESSIONID.
 	 */
 	public final static String COOKIE_JSESSIONID = "JSESSIONID";
