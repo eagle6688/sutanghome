@@ -44,6 +44,15 @@
                 }
             });
         });
+
+        $('#div-scrollbar a').each(function () {
+            var link = $(this).attr('href');
+
+            if (window.location.href.indexOf(link) > 0) {
+                $(this).parent('li').addClass('active');
+                $(this).parent('li').parent('ul[class*="js-sub-list"]').show();
+            }
+        });
     };
 
     common.init_dropdown = function () {
