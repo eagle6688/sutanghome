@@ -3,7 +3,7 @@
 	<groupId>com.sutanghome</groupId>
 	<artifactId>sutanghome</artifactId>
 	<version>1.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>sutanghome</name>
 	<url>http://maven.apache.org</url>
 	<parent>
@@ -40,11 +40,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<!-- Spring End -->
 
@@ -129,6 +124,22 @@
 		<!-- swagger end -->
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/view</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
