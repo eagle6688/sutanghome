@@ -16,6 +16,7 @@ import com.sutanghome.model.transfer.SearchTransferParam;
 import com.sutanghome.service.TransferService;
 
 import devutility.internal.models.BaseListResponse;
+import devutility.internal.models.BaseResponse;
 import devutility.internal.models.OperationResult;
 
 @Service
@@ -61,6 +62,24 @@ public class TransferServiceImpl implements TransferService {
 		TransferQueryModel queryModel = param.toQueryModel();
 		response.setCount(transferMapper.count(queryModel));
 		response.setData(transferMapper.list(queryModel));
+		return response;
+	}
+
+	@Override
+	public BaseResponse<TransferDO> detail(int id) {
+		BaseResponse<TransferDO> response = new BaseResponse<>();
+
+		TransferQueryModel queryModel = new TransferQueryModel();
+		queryModel.setId(id);
+
+		TransferDO model = transferMapper.get(queryModel);
+
+		if (model == null) {
+			response.setErrorMessage("记录不存在！");
+			return response;
+		}
+
+		response.setData(model);
 		return response;
 	}
 

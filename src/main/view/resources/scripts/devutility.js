@@ -1,11 +1,12 @@
 /**
- * @license devutility.js v20190202
+ * @license devutility.js v20190211
  * (c) Aldwin. https://github.com/eagle6688
  * License: MIT
  */
 
 var devutility = {
-    url: {}
+    url: {},
+    select: {}
 };
 
 devutility.url.addParam = function (url, name, value) {
@@ -17,4 +18,15 @@ devutility.url.addParam = function (url, name, value) {
 
     url += name + '=' + value;
     return url;
+};
+
+devutility.select.setByText = function (select, text) {
+    var optionCount = select.options.length;
+
+    for (var i = 0; i < optionCount; i++) {
+        if (text == select.options[i].text) {
+            select.options[i].selected = true;
+            break;
+        }
+    }
 };

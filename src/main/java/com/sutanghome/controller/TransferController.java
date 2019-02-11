@@ -18,6 +18,7 @@ import com.sutanghome.service.TransferService;
 import com.sutanghome.service.UserService;
 
 import devutility.internal.models.BaseListResponse;
+import devutility.internal.models.BaseResponse;
 import devutility.internal.models.OperationResult;
 
 @Controller
@@ -31,7 +32,7 @@ public class TransferController extends BaseController {
 
 	@GetMapping("index")
 	public String index(Model model) {
-		model.addAttribute("title", "Transfer");
+		model.addAttribute("title", PaymentType.TRANSFER.getName());
 		model.addAttribute("users", userService.listKV());
 		model.addAttribute("paymentMediums", PaymentMedium.listKV());
 		return "/transfer/index";
@@ -53,7 +54,13 @@ public class TransferController extends BaseController {
 		return transferService.add(param);
 	}
 
-	@PostMapping("update")
+	@GetMapping("detail")
+	@ResponseBody
+	public BaseResponse<TransferDO> detail(int id) {
+		return transferService.detail(id);
+	}
+
+	@PostMapping("edit")
 	@ResponseBody
 	public OperationResult update(EditTransferParam param) {
 		return transferService.update(param);
