@@ -9,7 +9,7 @@ public class SystemConfig {
 	/**
 	 * Url for default page.
 	 */
-	public final static String URL_DEFAULT = "/user/index";
+	public final static String URL_DEFAULT = "/payment/index";
 
 	/**
 	 * Cookie name of JSESSIONID.
