@@ -5,16 +5,16 @@
 	<div th:fragment="div-body" class="row">
 		<div class="user-data col-md-12">
 			<h3 class="title-5 m-b-35" style="display: inline;" th:text="${title}"></h3>
-			<div th:replace="~{@{/partial/btn-add} :: btn-add('btn-add')}"></div>
+			<div th:replace="~{@{/partial/btn-add} :: btn-add('btn-add', '添加用户')}"></div>
 			<div id="div-list" class="table-responsive table-responsive-data2">
 				<table class="table table-data2 table-hover">
 					<thead class="thead-light">
 						<tr>
-							<th>name</th>
-							<th>cellphone</th>
-							<th>create time</th>
-							<th>last update</th>
-							<th>operation</th>
+							<th>姓名</th>
+							<th>手机号码</th>
+							<th>创建时间</th>
+							<th>更新时间</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,7 +43,7 @@
 		<div th:replace="~{@{/partial/pagination} :: pagination('pagination')}"></div>
 	</div>
 	<section th:fragment="section-partial">
-		<div th:replace="~{@{/partial/modal} :: modal('div-modal', 'Save User', ~{@{/user/partial/data-form}::#data-form})}"></div>
+		<div th:replace="~{@{/partial/modal} :: modal('div-modal', '保存用户', ~{@{/user/partial/data-form}::#data-form})}"></div>
 	</section>
 	<script src="/templates/user/script/data-form.js"></script>
 	<script src="/templates/user/script/index.js"></script>

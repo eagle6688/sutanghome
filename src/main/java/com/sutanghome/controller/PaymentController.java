@@ -21,7 +21,7 @@ public class PaymentController extends BaseController {
 
 	@GetMapping("index")
 	public String index(Model model) {
-		model.addAttribute("title", "Payment");
+		model.addAttribute("title", "支付记录");
 		return "/payment/index";
 	}
 

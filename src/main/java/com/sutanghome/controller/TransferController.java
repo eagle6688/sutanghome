@@ -32,7 +32,7 @@ public class TransferController extends BaseController {
 
 	@GetMapping("index")
 	public String index(Model model) {
-		model.addAttribute("title", PaymentType.TRANSFER.getName());
+		model.addAttribute("title", "转账记录");
 		model.addAttribute("users", userService.listKV());
 		model.addAttribute("paymentMediums", PaymentMedium.listKV());
 		return "/transfer/index";

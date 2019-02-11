@@ -129,6 +129,10 @@
     };
 
     Plugin.prototype.edit = function () {
+        if (this.operationType != operationType.edit) {
+            this.clear();
+        }
+
         this.setOperationType(operationType.edit);
         this.show();
     };
