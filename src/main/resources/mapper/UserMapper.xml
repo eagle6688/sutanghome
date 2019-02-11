@@ -29,7 +29,7 @@
 		<if test="skip >= 0 and take > 0">limit #{skip}, #{take}</if>
 	</sql>
 
-	<insert id="insert">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into user (name, cellphone, password)
 		values (#{name}, #{cellphone}, #{password})
 	</insert>
@@ -51,8 +51,8 @@
 		<include refid="QUERY_ORDER" />
 		<include refid="QUERY_PAGING" />
 	</select>
-	<select id="listKV">
-		select id key, name value
+	<select id="listKV" resultType="KeyValue">
+		select id 'key', name value
 		from user
 		<include refid="QUERY_WHERE" />
 		<include refid="QUERY_ORDER" />

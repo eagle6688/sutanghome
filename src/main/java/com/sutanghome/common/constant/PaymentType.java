@@ -3,6 +3,8 @@ package com.sutanghome.common.constant;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import devutility.internal.models.KeyValue;
 
 public enum PaymentType {
@@ -38,6 +40,7 @@ public enum PaymentType {
 		return value;
 	}
 
+	@JsonValue
 	public String getName() {
 		return name;
 	}

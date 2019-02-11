@@ -1,6 +1,6 @@
 var page = {
-    url_list: '/user/list',
-    url_detail: '/user/detail',
+    url_list: '/transfer/list',
+    url_detail: '/transfer/detail',
     $list: $('#div-list'),
     vueHelper: null,
     formModal: null

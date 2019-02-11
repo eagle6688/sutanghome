@@ -3,6 +3,8 @@ package com.sutanghome.model.transfer;
 import javax.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sutanghome.common.constant.PaymentType;
+import com.sutanghome.dao.entities.Payment;
 import com.sutanghome.dao.entities.Transfer;
 import com.sutanghome.dao.model.transfer.TransferQueryModel;
 import com.sutanghome.model.payment.AddPaymentParam;
@@ -35,5 +37,12 @@ public class AddTransferParam extends AddPaymentParam {
 		model.setId(paymentId);
 		model.setToUserId(toUserId);
 		return model;
+	}
+
+	@Override
+	public Payment toPayment() {
+		Payment payment = super.toPayment();
+		payment.setType(PaymentType.TRANSFER);
+		return payment;
 	}
 }

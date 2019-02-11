@@ -3,9 +3,12 @@ package com.sutanghome.model.payment;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sutanghome.common.constant.PaymentMedium;
@@ -17,23 +20,24 @@ import devutility.external.javax.validation.annotation.Validation;
 @Validation
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddPaymentParam {
-	@NotNull(message = "userId不能为空！")
-	@Min(value = 1, message = "请输入正确的userId！")
+	@NotNull(message = "用户id不能为空！")
+	@Min(value = 1, message = "请输入正确的用户id！")
 	private int userId;
 
-	@NotNull(message = "type不能为空！")
 	private PaymentType type;
 
-	@NotNull(message = "cost不能为空！")
-	@Min(value = 1, message = "请输入正确的cost！")
+	@NotNull(message = "金额不能为空！")
+	@Digits(integer = 8, fraction = 2, message = "请输入正确的金额！")
 	private BigDecimal cost;
 
-	@NotNull(message = "medium不能为空！")
+	@NotNull(message = "转账媒介不能为空！")
 	private PaymentMedium medium;
 
+	@NotNull(message = "转账时间不能为空！")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date time;
 
-	@Size(max = 200, message = "description的长度应小于200个字符！")
+	@Size(max = 200, message = "备注的长度应小于200个字符！")
 	private String description;
 
 	public int getUserId() {

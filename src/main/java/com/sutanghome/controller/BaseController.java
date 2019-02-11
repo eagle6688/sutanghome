@@ -40,6 +40,7 @@ public abstract class BaseController {
 			return;
 		}
 
+		model.addAttribute("userId", account.getUserId());
 		model.addAttribute("userName", account.getName());
 		model.addAttribute("cellphone", account.getCellphone());
 	}

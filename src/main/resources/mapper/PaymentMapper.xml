@@ -38,7 +38,7 @@
 		<if test="skip >= 0 and take > 0">limit #{skip}, #{take}</if>
 	</sql>
 
-	<insert id="insert">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		insert into payment (userid, type, cost, medium, time, description)
 		values (#{userId}, #{type}, #{cost}, #{medium}, #{time}, #{description})
 	</insert>

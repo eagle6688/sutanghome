@@ -1,6 +1,6 @@
 var dataForm = {
     url_add: '/transfer/add',
-    url_edit: '/user/edit'
+    url_edit: '/transfer/edit'
 };
 
 dataForm.init = function () {

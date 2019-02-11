@@ -6,11 +6,12 @@ import com.sutanghome.model.transfer.EditTransferParam;
 import com.sutanghome.model.transfer.SearchTransferParam;
 
 import devutility.internal.models.BaseListResponse;
+import devutility.internal.models.OperationResult;
 
 public interface TransferService {
-	void add(AddTransferParam param);
+	OperationResult add(AddTransferParam param);
 
 	BaseListResponse<TransferDO> pageData(SearchTransferParam param);
 
-	void update(EditTransferParam param);
+	OperationResult update(EditTransferParam param);
 }

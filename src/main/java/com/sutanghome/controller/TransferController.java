@@ -4,16 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sutanghome.common.constant.PaymentMedium;
 import com.sutanghome.common.constant.PaymentType;
 import com.sutanghome.dao.model.transfer.TransferDO;
+import com.sutanghome.model.transfer.AddTransferParam;
+import com.sutanghome.model.transfer.EditTransferParam;
 import com.sutanghome.model.transfer.SearchTransferParam;
 import com.sutanghome.service.TransferService;
 import com.sutanghome.service.UserService;
 
 import devutility.internal.models.BaseListResponse;
+import devutility.internal.models.OperationResult;
 
 @Controller
 @RequestMapping("transfer")
@@ -28,7 +33,7 @@ public class TransferController extends BaseController {
 	public String index(Model model) {
 		model.addAttribute("title", "Transfer");
 		model.addAttribute("users", userService.listKV());
-		model.addAttribute("paymentTypes", PaymentType.listKV());
+		model.addAttribute("paymentMediums", PaymentMedium.listKV());
 		return "/transfer/index";
 	}
 
@@ -36,8 +41,21 @@ public class TransferController extends BaseController {
 	@ResponseBody
 	public BaseListResponse<TransferDO> list(int pageIndex, int pageSize) {
 		SearchTransferParam param = new SearchTransferParam();
+		param.setType(PaymentType.TRANSFER);
 		param.setPageIndex(pageIndex);
 		param.setPageSize(pageSize);
 		return transferService.pageData(param);
+	}
+
+	@PostMapping("add")
+	@ResponseBody
+	public OperationResult add(AddTransferParam param) {
+		return transferService.add(param);
+	}
+
+	@PostMapping("update")
+	@ResponseBody
+	public OperationResult update(EditTransferParam param) {
+		return transferService.update(param);
 	}
 }
