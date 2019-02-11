@@ -38,6 +38,18 @@
 		from user
 		<include refid="QUERY_WHERE_NOTEQUAL" />
 	</select>
+	<select id="countForSave" resultType="java.lang.Integer">
+		select count(0)
+		from user
+		<where>
+			deleted = 0
+			<if test="id != null and id > 0">and id = #{id}</if>
+			and (
+			<if test="name != null and name != ''">name = #{name}</if>
+			<if test="cellphone != null and cellphone != ''">or cellphone = #{cellphone}</if>
+			)
+		</where>
+	</select>
 	<select id="get" resultType="User">
 		<include refid="QUERY_SELECT" />
 		from user

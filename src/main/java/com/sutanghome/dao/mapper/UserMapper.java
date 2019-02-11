@@ -15,6 +15,8 @@ public interface UserMapper {
 
 	int count(User entity);
 
+	int countForSave(User entity);
+
 	User get(User entity);
 
 	List<User> list(UserQueryModel model);

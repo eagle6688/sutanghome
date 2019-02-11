@@ -10,10 +10,9 @@ import com.sutanghome.model.user.SearchUserParam;
 import devutility.internal.models.BaseListResponse;
 import devutility.internal.models.BaseResponse;
 import devutility.internal.models.KeyValue;
-import devutility.internal.models.OperationResult;
 
 public interface UserService {
-	OperationResult add(AddUserParam param);
+	void add(AddUserParam param);
 
 	BaseListResponse<User> pageData(SearchUserParam param);
 
@@ -21,7 +20,7 @@ public interface UserService {
 
 	BaseResponse<User> detail(int id);
 
-	OperationResult update(EditUserParam param);
+	void update(EditUserParam param);
 
-	OperationResult delete(int id);
+	void delete(int id);
 }

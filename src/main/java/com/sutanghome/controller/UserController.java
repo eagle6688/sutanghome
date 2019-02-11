@@ -42,7 +42,11 @@ public class UserController extends BaseController {
 	@PostMapping("add")
 	@ResponseBody
 	public OperationResult add(AddUserParam param) {
-		return userService.add(param);
+		userService.add(param);
+
+		OperationResult result = new OperationResult();
+		result.setMessage("保存成功！");
+		return result;
 	}
 
 	@GetMapping("detail")
@@ -54,12 +58,20 @@ public class UserController extends BaseController {
 	@PostMapping("edit")
 	@ResponseBody
 	public OperationResult edit(EditUserParam param) {
-		return userService.update(param);
+		userService.update(param);
+
+		OperationResult result = new OperationResult();
+		result.setMessage("保存成功！");
+		return result;
 	}
 
 	@GetMapping("delete")
 	@ResponseBody
 	public OperationResult delete(int id) {
-		return userService.delete(id);
+		userService.delete(id);
+
+		OperationResult result = new OperationResult();
+		result.setMessage("删除成功！");
+		return result;
 	}
 }

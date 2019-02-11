@@ -17,7 +17,6 @@ import com.sutanghome.service.UserService;
 import devutility.internal.models.BaseListResponse;
 import devutility.internal.models.BaseResponse;
 import devutility.internal.models.KeyValue;
-import devutility.internal.models.OperationResult;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,17 +28,12 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	@Override
-	public OperationResult add(AddUserParam param) {
-		OperationResult result = new OperationResult();
-
-		if (userMapper.count(param.toCountEntity()) > 0) {
-			result.setErrorMessage("该用户已存在！");
-			return result;
+	public void add(AddUserParam param) {
+		if (userMapper.countForSave(param.toCountEntity()) > 0) {
+			throw new IllegalArgumentException("该用户已存在！");
 		}
 
 		userMapper.insert(param.toEntity());
-		result.setMessage("用户保存成功！");
-		return result;
 	}
 
 	@Override
@@ -74,31 +68,20 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	@Override
-	public OperationResult update(EditUserParam param) {
-		OperationResult result = new OperationResult();
-
-		if (userMapper.count(param.toCountEntity()) > 0) {
-			result.setErrorMessage("该用户已存在！");
-			return result;
+	public void update(EditUserParam param) {
+		if (userMapper.countForSave(param.toCountEntity()) > 0) {
+			throw new IllegalArgumentException("该用户已存在！");
 		}
 
-		if (userMapper.update(param.toEntity()) > 0) {
-			result.setMessage("用户保存成功！");
+		if (userMapper.update(param.toEntity()) != 1) {
+			throw new IllegalArgumentException("用户保存失败！");
 		}
-
-		return result;
 	}
 
 	@Override
-	public OperationResult delete(int id) {
-		OperationResult result = new OperationResult();
-
-		if (userMapper.delete(id) == 1) {
-			result.setMessage("删除用户成功！");
-		} else {
-			result.setErrorMessage("删除用户失败！");
+	public void delete(int id) {
+		if (userMapper.delete(id) != 1) {
+			throw new IllegalArgumentException("删除用户失败！");
 		}
-
-		return result;
 	}
 }

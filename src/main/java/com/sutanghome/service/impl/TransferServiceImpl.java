@@ -17,7 +17,6 @@ import com.sutanghome.service.TransferService;
 
 import devutility.internal.models.BaseListResponse;
 import devutility.internal.models.BaseResponse;
-import devutility.internal.models.OperationResult;
 
 @Service
 public class TransferServiceImpl implements TransferService {
@@ -29,13 +28,11 @@ public class TransferServiceImpl implements TransferService {
 
 	@Transactional
 	@Override
-	public OperationResult add(AddTransferParam param) {
-		OperationResult result = new OperationResult();
+	public void add(AddTransferParam param) {
 		Payment payment = param.toPayment();
 
 		if (paymentMapper.count(payment) > 0) {
-			result.setErrorMessage("Payment已经存在！");
-			return result;
+			throw new IllegalArgumentException("Payment已经存在！");
 		}
 
 		paymentMapper.insert(payment);
@@ -45,15 +42,11 @@ public class TransferServiceImpl implements TransferService {
 		 * 判断当前Payment主键和toUserId是否存在。
 		 */
 		if (transferMapper.count(transferQueryModel) > 0) {
-			result.setErrorMessage("Transfer已经存在！");
-			return result;
+			throw new IllegalArgumentException("Transfer已经存在！");
 		}
 
 		Transfer transfer = param.toTransfer(payment.getId());
 		transferMapper.insert(transfer);
-
-		result.setMessage("Transfer保存成功！");
-		return result;
 	}
 
 	@Override
@@ -85,27 +78,21 @@ public class TransferServiceImpl implements TransferService {
 
 	@Transactional
 	@Override
-	public OperationResult update(EditTransferParam param) {
-		OperationResult result = new OperationResult();
+	public void update(EditTransferParam param) {
 		Payment payment = param.toPayment();
 
 		if (paymentMapper.count(payment) > 0) {
-			result.setErrorMessage("Payment信息重复！");
-			return result;
+			throw new IllegalArgumentException("Payment信息重复！");
 		}
 
 		if (paymentMapper.update(payment) != 1) {
-			result.setErrorMessage("Payment保存失败！");
-			return result;
+			throw new IllegalArgumentException("Payment保存失败！");
 		}
 
 		Transfer transfer = param.toTransfer();
 
 		if (transferMapper.update(transfer) != 1) {
-			result.setErrorMessage("Transfer保存失败！");
+			throw new IllegalArgumentException("Transfer保存失败！");
 		}
-
-		result.setMessage("Transfer保存成功！");
-		return result;
 	}
 }

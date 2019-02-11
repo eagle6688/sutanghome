@@ -51,7 +51,11 @@ public class TransferController extends BaseController {
 	@PostMapping("add")
 	@ResponseBody
 	public OperationResult add(AddTransferParam param) {
-		return transferService.add(param);
+		transferService.add(param);
+
+		OperationResult result = new OperationResult();
+		result.setMessage("保存成功！");
+		return result;
 	}
 
 	@GetMapping("detail")
@@ -63,6 +67,10 @@ public class TransferController extends BaseController {
 	@PostMapping("edit")
 	@ResponseBody
 	public OperationResult update(EditTransferParam param) {
-		return transferService.update(param);
+		transferService.update(param);
+
+		OperationResult result = new OperationResult();
+		result.setMessage("保存成功！");
+		return result;
 	}
 }
