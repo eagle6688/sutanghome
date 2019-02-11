@@ -33,7 +33,8 @@ public class SignServiceImpl implements SignService {
 
 		Account account = Account.parse(sessionId, user);
 		accountCache.set(account);
-		
+
+		result.setMessage("登录成功！");
 		result.setData(SystemConfig.URL_DEFAULT);
 		return result;
 	}

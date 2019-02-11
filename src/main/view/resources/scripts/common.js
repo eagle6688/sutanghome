@@ -1,10 +1,24 @@
 (function () {
-    var common = {};
+    var common = {
+        signOutUrl: '/sign/out'
+    };
 
     common.init = function () {
+        this.init_ajax();
         this.init_navigator_scrollbar();
         this.init_navigator_sublist();
-        common.init_ajax();
+        this.init_dropdown();
+        this.init_sign_out();
+    };
+
+    common.init_ajax = function () {
+        $.ajaxSetup({
+            global: true,
+            cache: false,
+            error: function (xhr, status, error) {
+                alert('系统错误，请联系管理员！');
+            }
+        });
     };
 
     common.init_navigator_scrollbar = function () {
@@ -32,14 +46,35 @@
         });
     };
 
-    common.init_ajax = function () {
-        $.ajaxSetup({
-            global: true,
-            cache: false,
-            error: function (xhr, status, error) {
-                alert('系统错误，请联系管理员！');
+    common.init_dropdown = function () {
+        var $dropdowns = $('.js-item-menu');
+
+        $dropdowns.click(function (e) {
+            e.preventDefault();
+            var $this = $(this);
+
+            for (var i = 0; i < $dropdowns.length; i++) {
+                if ($dropdowns[i] == $this[0]) {
+                    continue;
+                }
+
+                $($dropdowns[i]).removeClass('show-dropdown');
             }
+
+            $this.toggleClass('show-dropdown');
         });
+
+        $('.js-item-menu, .js-dropdown').click(function (event) {
+            event.stopPropagation();
+        });
+
+        $('body,html').click(function () {
+            $dropdowns.remove('show-dropdown');
+        });
+    };
+
+    common.init_sign_out = function () {
+
     };
 
     $(document).ready(function () {
