@@ -74,7 +74,15 @@
     };
 
     common.init_sign_out = function () {
-
+        $('.account-dropdown__footer>a').click(function () {
+            $.getJSON(common.signOutUrl, function (result) {
+                if (result.succeeded) {
+                    location.href = result.data;
+                } else {
+                    alert(result.message);
+                }
+            });
+        });
     };
 
     $(document).ready(function () {

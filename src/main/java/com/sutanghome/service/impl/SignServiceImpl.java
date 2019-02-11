@@ -38,4 +38,17 @@ public class SignServiceImpl implements SignService {
 		result.setData(SystemConfig.URL_DEFAULT);
 		return result;
 	}
+
+	@Override
+	public OperationResult out(Account account) {
+		OperationResult result = new OperationResult();
+		result.setData(SystemConfig.URL_LOGIN);
+
+		if (account == null) {
+			return result;
+		}
+
+		accountCache.del(account.getSessionId());
+		return result;
+	}
 }

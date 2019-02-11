@@ -37,10 +37,11 @@ page.sign = function () {
         },
         success: function (data) {
             page.locker = false;
-            alert(data.message);
 
             if (data.succeeded) {
                 location.href = data.data;
+            } else {
+                alert(data.message);
             }
         }
     });
