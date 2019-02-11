@@ -1,21 +1,33 @@
 <form id="data-form">
     <input id="txt-id" name="id" type="hidden" value="">
     <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select id="select-user" name="userId" class="form-control">
-            <option value=""></option>
+        <label for="select-user">用户</label>
+        <select id="select-user" name="userId" class="form-control" readonly="true">
+            <option th:value="${userId}" th:text="${userName}" selected="true"></option>
         </select>
     </div>
     <div class="form-group">
-        <label for="txt-name">Name</label>
-        <input id="txt-name" name="name" type="text" class="form-control" placeholder="Name" maxlength="20">
+        <label for="select-channel">购物渠道</label>
+        <select id="select-channel" name="channel" class="form-control">
+            <option th:each="shoppingChannel : ${shoppingChannels}" th:value="${shoppingChannel.key}" th:text="${shoppingChannel.value}"></option>
+        </select>
     </div>
     <div class="form-group">
-        <label for="txt-cellphone">Cellphone</label>
-        <input id="txt-cellphone" name="cellphone" type="text" class="form-control" placeholder="Cellphone" maxlength="11">
+        <label for="select-medium">支付媒介</label>
+        <select id="select-medium" name="medium" class="form-control">
+            <option th:each="paymentMedium : ${paymentMediums}" th:value="${paymentMedium.key}" th:text="${paymentMedium.value}"></option>
+        </select>
     </div>
     <div class="form-group">
-        <label for="txt-password">Password</label>
-        <input id="txt-password" name="password" type="password" class="form-control" placeholder="Password" maxlength="36">
+        <label for="txt-time">购物时间</label>
+        <input id="txt-time" name="time" type="text" class="form-control" placeholder="2018-08-08" maxlength="10">
+    </div>
+    <div class="form-group">
+        <label for="txt-cost">数额</label>
+        <input id="txt-cost" name="cost" type="text" class="form-control" placeholder="数额" maxlength="10">
+    </div>
+    <div class="form-group">
+        <label for="txt-description">备注</label>
+        <input id="txt-description" name="description" type="text" class="form-control" placeholder="描述" maxlength="200">
     </div>
 </form>

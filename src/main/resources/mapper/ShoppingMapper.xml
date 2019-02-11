@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sutanghome.dao.mapper.ShoppingMapper">
 	<sql id="QUERY_SELECT">
-		select p.id, u.name userName, 'SHOPPING' type, s.channel, p.cost, p.medium, p.time, p.description, p.created, p.updated
+		select p.id, u.name userName, p.type, s.channel, p.cost, p.medium, p.time, p.description, p.created, p.updated
 		from (select * from payment
 		<include refid="QUERY_WHERE_PAYMENT" />
 		) p
@@ -38,7 +38,7 @@
 	</sql>
 
 	<insert id="insert">
-		insert into transfer (paymentid, channel)
+		insert into shopping (paymentid, channel)
 		values (#{paymentId}, #{channel})
 	</insert>
 	<select id="count" resultType="java.lang.Integer">
@@ -57,7 +57,7 @@
 		<include refid="QUERY_PAGING" />
 	</select>
 	<update id="update">
-		update transfer
+		update shopping
 		set channel = #{channel}
 		where paymentid = #{paymentId}
 	</update>

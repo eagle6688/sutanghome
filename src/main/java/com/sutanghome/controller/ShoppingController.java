@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sutanghome.common.constant.PaymentMedium;
 import com.sutanghome.common.constant.PaymentType;
+import com.sutanghome.common.constant.ShoppingChannel;
 import com.sutanghome.dao.model.shopping.ShoppingDO;
 import com.sutanghome.model.shopping.AddShoppingParam;
 import com.sutanghome.model.shopping.EditShoppingParam;
@@ -29,6 +30,7 @@ public class ShoppingController extends BaseController {
 	@GetMapping("index")
 	public String index(Model model) {
 		model.addAttribute("title", "购物记录");
+		model.addAttribute("shoppingChannels", ShoppingChannel.listKV());
 		model.addAttribute("paymentMediums", PaymentMedium.listKV());
 		return "/shopping/index";
 	}

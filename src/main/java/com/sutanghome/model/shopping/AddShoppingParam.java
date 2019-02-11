@@ -3,7 +3,9 @@ package com.sutanghome.model.shopping;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sutanghome.common.constant.PaymentType;
 import com.sutanghome.common.constant.ShoppingChannel;
+import com.sutanghome.dao.entities.Payment;
 import com.sutanghome.dao.entities.Shopping;
 import com.sutanghome.dao.model.shopping.ShoppingQueryModel;
 import com.sutanghome.model.payment.AddPaymentParam;
@@ -36,5 +38,12 @@ public class AddShoppingParam extends AddPaymentParam {
 		model.setId(paymentId);
 		model.setChannel(channel);
 		return model;
+	}
+
+	@Override
+	public Payment toPayment() {
+		Payment payment = super.toPayment();
+		payment.setType(PaymentType.SHOPPING);
+		return payment;
 	}
 }
