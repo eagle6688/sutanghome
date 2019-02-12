@@ -8,8 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sutanghome.dao.entities.User;
 
-import devutility.external.javax.validation.annotation.PatternIfNotNull;
-import devutility.external.javax.validation.annotation.SizeIfNotNull;
+import devutility.external.javax.validation.annotation.PatternIfNotBlank;
+import devutility.external.javax.validation.annotation.SizeIfNotBlank;
 import devutility.external.javax.validation.annotation.Validation;
 import devutility.internal.security.SHA256Utils;
 
@@ -20,10 +20,10 @@ public class AddUserParam {
 	@Size(max = 10, message = "姓名长度不能超过10个字符！")
 	private String name;
 
-	@PatternIfNotNull(regexp = "^1(3|4|5|7|8)\\d{9}$", message = "请输入正确格式的手机号码！")
+	@PatternIfNotBlank(regexp = "^1(3|4|5|7|8)\\d{9}$", message = "请输入正确格式的手机号码！")
 	private String cellphone;
 
-	@SizeIfNotNull(min = 6, max = 36, message = "请输入6-36位密码！")
+	@SizeIfNotBlank(min = 6, max = 36, message = "请输入6-36位密码！")
 	private String password;
 
 	public String getName() {
