@@ -2,13 +2,14 @@
 <html th:fragment="layout(links, content, partials, scripts)" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{partial/head-resource :: head-resource(~{::link}, ~{::script})}">
-    <link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/resources/styles/font-face.css" />
-    <link rel="stylesheet" href="/vendors/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="/vendors/font-awesome/css/all.min.css" />
-    <link rel="stylesheet" href="/vendors/mdi-font/css/material-design-iconic-font.min.css" />
-    <link rel="stylesheet" href="/vendors/select2/select2.min.css" />
-    <link rel="stylesheet" href="/resources/styles/cooladmin-theme.css" />
+    <link href="/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="/resources/styles/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+    <link href="/vendors/font-awesome/css/all.min.css" rel="stylesheet" media="all">
+    <link href="/vendors/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/vendors/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendors/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/resources/styles/cooladmin-theme.css" rel="stylesheet" media="all">
     <th:block th:replace="${links}" />
     <script src="/resources/scripts/jquery-1.12.4.min.js"></script>
     <script src="/vendors/bootstrap/js/bootstrap.min.js"></script>

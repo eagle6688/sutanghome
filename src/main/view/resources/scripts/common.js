@@ -7,6 +7,7 @@
         this.init_ajax();
         this.init_navigator_scrollbar();
         this.init_navigator_sublist();
+        this.init_mobile();
         this.init_dropdown();
         this.init_sign_out();
     };
@@ -52,6 +53,13 @@
                 $(this).parent('li').addClass('active');
                 $(this).parent('li').parent('ul[class*="js-sub-list"]').show();
             }
+        });
+    };
+
+    common.init_mobile = function () {
+        $('.hamburger').on('click', function () {
+            $(this).toggleClass('is-active');
+            $('.navbar-mobile').slideToggle('500');
         });
     };
 
