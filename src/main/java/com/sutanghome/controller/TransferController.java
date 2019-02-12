@@ -35,7 +35,7 @@ public class TransferController extends BaseController {
 		model.addAttribute("title", "转账记录");
 		model.addAttribute("users", userService.listKV());
 		model.addAttribute("paymentMediums", PaymentMedium.listKV());
-		return "/transfer/index";
+		return "transfer/index";
 	}
 
 	@GetMapping("list")

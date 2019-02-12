@@ -32,7 +32,7 @@ public class ShoppingController extends BaseController {
 		model.addAttribute("title", "购物记录");
 		model.addAttribute("shoppingChannels", ShoppingChannel.listKV());
 		model.addAttribute("paymentMediums", PaymentMedium.listKV());
-		return "/shopping/index";
+		return "shopping/index";
 	}
 
 	@GetMapping("list")

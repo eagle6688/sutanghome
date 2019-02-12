@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:replace="~{/layout/layout :: layout(~{}, ~{::div-body}, ~{}, ~{::script})}">
+<html th:replace="~{layout/layout :: layout(~{}, ~{::div-body}, ~{}, ~{::script})}">
 
 <body>
     <div th:fragment="div-body" class="row">
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div th:fragment="div-body" class="row">
-        <div th:replace="~{/partial/pagination :: pagination('pagination')}"></div>
+        <div th:replace="~{partial/pagination :: pagination('pagination')}"></div>
     </div>
     <script src="/templates/payment/script/index.js"></script>
 </body>

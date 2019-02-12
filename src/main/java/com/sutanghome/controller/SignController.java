@@ -22,7 +22,7 @@ public class SignController extends BaseController {
 	@PublicAction
 	@GetMapping("index")
 	public String index() {
-		return "/sign/index";
+		return "sign/index";
 	}
 
 	@PublicAction

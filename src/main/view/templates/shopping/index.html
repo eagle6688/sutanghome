@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html th:replace="~{@{/layout/layout.html} :: layout(~{}, ~{::div-body}, ~{::section-partial}, ~{::script})}">
+<html th:replace="~{layout/layout.html :: layout(~{}, ~{::div-body}, ~{::section-partial}, ~{::script})}">
 
 <body>
     <div th:fragment="div-body" class="row">
         <div class="user-data col-md-12">
             <h3 class="title-5 m-b-35" style="display: inline;" th:text="${title}"></h3>
-            <div th:replace="~{@{/partial/btn-add} :: btn-add('btn-add', '添加购物记录')}"></div>
+            <div th:replace="~{partial/btn-add :: btn-add('btn-add', '添加购物记录')}"></div>
             <div id="div-list" class="table-responsive table-responsive-data2">
                 <table class="table table-data2 table-hover">
                     <thead class="thead-light">
@@ -48,10 +48,10 @@
         </div>
     </div>
     <div th:fragment="div-body" class="row">
-        <div th:replace="~{@{/partial/pagination} :: pagination('pagination')}"></div>
+        <div th:replace="~{partial/pagination :: pagination('pagination')}"></div>
     </div>
     <section th:fragment="section-partial">
-        <div th:replace="~{@{/partial/modal} :: modal('div-modal', '保存购物记录', ~{@{/shopping/partial/data-form}::#data-form})}"></div>
+        <div th:replace="~{partial/modal :: modal('div-modal', '保存购物记录', ~{shopping/partial/data-form :: #data-form})}"></div>
     </section>
     <script src="/templates/shopping/script/data-form.js"></script>
     <script src="/templates/shopping/script/index.js"></script>

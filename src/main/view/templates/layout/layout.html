@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html th:fragment="layout(links, content, partials, scripts)" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{/partial/head-resource :: head-resource(~{::link}, ~{::script})}">
+<head th:replace="~{partial/head-resource :: head-resource(~{::link}, ~{::script})}">
     <link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/resources/styles/font-face.css" />
     <link rel="stylesheet" href="/vendors/perfect-scrollbar/perfect-scrollbar.css" />
@@ -25,10 +25,10 @@
 
 <body>
     <div class="page-wrapper">
-        <div th:replace="/partial/header-mobile:: header-mobile"></div>
-        <div th:replace="/partial/navigator :: navigator"></div>
+        <div th:replace="partial/header-mobile:: header-mobile"></div>
+        <div th:replace="partial/navigator :: navigator"></div>
         <div class="page-container">
-            <div th:replace="/partial/header :: header"></div>
+            <div th:replace="partial/header :: header"></div>
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
