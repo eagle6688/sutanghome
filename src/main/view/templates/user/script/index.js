@@ -28,8 +28,8 @@ page.edit = function (id) {
     var url = devutility.url.addParam(page.url_detail, 'id', id);
 
     $.getJSON(url, function (result) {
-        dataForm.set(result.data);
         page.formModal.edit();
+        dataForm.set(result.data);
     });
 };
 

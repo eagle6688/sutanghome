@@ -43,7 +43,7 @@
 		from user
 		<where>
 			deleted = 0
-			<if test="id != null and id > 0">and id = #{id}</if>
+			<if test="id != null and id > 0">and id != #{id}</if>
 			and (
 			<if test="name != null and name != ''">name = #{name}</if>
 			<if test="cellphone != null and cellphone != ''">or cellphone = #{cellphone}</if>
