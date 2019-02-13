@@ -6,8 +6,8 @@ var page = {
 };
 
 page.init = function () {
-    this.$signBtn = $('#btn-sign');
-    this.$form = this.$signBtn.parent('form');
+    page.$signBtn = $('#btn-sign');
+    page.$form = page.$signBtn.parent('form');
     page.bind();
 };
 
@@ -16,7 +16,7 @@ page.bind = function () {
 };
 
 page.bind_btn_sign = function () {
-    this.$signBtn.click(function () {
+    page.$signBtn.click(function () {
         if (page.locker) {
             return;
         }

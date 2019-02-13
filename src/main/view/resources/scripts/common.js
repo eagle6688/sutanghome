@@ -1,15 +1,15 @@
-(function () {
+var common = (function () {
     var common = {
         signOutUrl: '/sign/out'
     };
 
     common.init = function () {
-        this.init_ajax();
-        this.init_navigator_scrollbar();
-        this.init_navigator_sublist();
-        this.init_mobile();
-        this.init_dropdown();
-        this.init_sign_out();
+        common.init_ajax();
+        common.init_navigator_scrollbar();
+        common.init_navigator_sublist();
+        common.init_mobile();
+        common.init_dropdown();
+        common.init_sign_out();
     };
 
     common.init_ajax = function () {
@@ -31,19 +31,17 @@
     };
 
     common.init_navigator_sublist = function () {
-        $('.js-arrow').each(function () {
-            $(this).on('click', function (e) {
-                e.preventDefault();
-                var $this = $(this);
-                var href = $this.attr('href');
-                $this.find(".arrow").toggleClass("up");
-                $this.toggleClass("open");
-                $this.parent().find('.js-sub-list').slideToggle("250");
+        $('.js-arrow').click(function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var href = $this.attr('href');
+            $this.find(".arrow").toggleClass("up");
+            $this.toggleClass("open");
+            $this.parent().find('.js-sub-list').slideToggle("250");
 
-                if (href && href.indexOf('/') == 0 || href.indexOf('http') == 0) {
-                    location.href = href;
-                }
-            });
+            if (href && href.indexOf('/') == 0 || href.indexOf('http') == 0) {
+                location.href = href;
+            }
         });
 
         $('#div-scrollbar a').each(function () {
@@ -102,7 +100,36 @@
         });
     };
 
-    $(document).ready(function () {
-        common.init();
-    });
+    common.bind_list = function ($list, listUrl) {
+        var vueHelper = $list.vueHelper({
+            url: listUrl,
+            onReload: function (data) {
+                $('#pagination').data('pagination').changeTotalRecords(data.count);
+            }
+        });
+
+        $('#pagination').pagination({
+            firstButtonName: '第一页',
+            prevButtonName: '上一页',
+            nextButtonName: '下一页',
+            lastButtonName: '末尾页',
+            buttonClass: 'page-item',
+            buttonAClass: 'page-link',
+            paginationClass: 'pagination justify-content-center',
+            onPageClick: function (pageIndex) {
+                vueHelper.changePage(pageIndex);
+            }
+        });
+
+        return vueHelper;
+    };
+
+    return {
+        init: common.init,
+        bind_list: common.bind_list
+    };
 })();
+
+$(document).ready(function () {
+    common.init();
+});

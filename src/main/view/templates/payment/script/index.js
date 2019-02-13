@@ -7,29 +7,11 @@ var page = {
 
 page.init = function () {
     selector.init();
-    this.bind();
+    page.bind();
 };
 
 page.bind = function () {
-    this.bind_list();
-};
-
-page.bind_list = function () {
-    $('#pagination').pagination({
-        buttonClass: 'page-item',
-        buttonAClass: 'page-link',
-        paginationClass: 'pagination justify-content-center',
-        onPageClick: function (pageIndex) {
-            vueHelper.changePage(pageIndex);
-        }
-    });
-
-    vueHelper = this.$list.vueHelper({
-        url: this.url_list,
-        onReload: function (data) {
-            $('#pagination').data('pagination').changeTotalRecords(data.count);
-        }
-    });
+    page.vueHelper = common.bind_list(page.$list, page.url_list);
 };
 
 page.init();

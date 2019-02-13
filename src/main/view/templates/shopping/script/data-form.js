@@ -15,7 +15,7 @@ dataForm.init = function () {
 
             if (data.succeeded) {
                 formModal.hide();
-                vueHelper.reload();
+                page.vueHelper.reload();
             }
         }
     });
