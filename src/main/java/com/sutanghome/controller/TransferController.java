@@ -42,6 +42,7 @@ public class TransferController extends BaseController {
 	@ResponseBody
 	public BaseListResponse<TransferDO> list(int pageIndex, int pageSize) {
 		SearchTransferParam param = new SearchTransferParam();
+		param.setUserId(account().getUserId());
 		param.setType(PaymentType.TRANSFER);
 		param.setPageIndex(pageIndex);
 		param.setPageSize(pageSize);

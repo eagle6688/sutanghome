@@ -250,8 +250,9 @@ section {
 
 @media (max-width: 991px) {
     .page-container {
-        position: relative;
-        top: 88px;
+        /* position: relative;
+        top: 88px; */
+        margin-top: 83px;
         padding-left: 0;
     }
 }

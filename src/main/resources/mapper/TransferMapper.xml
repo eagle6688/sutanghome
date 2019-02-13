@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sutanghome.dao.mapper.TransferMapper">
-	<sql id="QUERY_SELECT">
+	<sql id="QUERY_SELECT_FIELDS">
 		select p.id, fu.name userName, p.type, t.to_user_id toUserId, tu.name toUser, p.cost, p.medium, p.time, p.description, p.created, p.updated
+	</sql>
+	<sql id="QUERY_SELECT">
+		<include refid="QUERY_SELECT_FIELDS" />
 		from (select * from payment
 		<include refid="QUERY_WHERE_PAYMENT" />
 		) p
+		inner join (select * from transfer
+		<include refid="QUERY_WHERE_TRANSFER" />
+		) t on p.id = t.paymentid
+		inner join user fu on p.userid = fu.id and fu.deleted = 0
+		inner join user tu on t.to_user_id = tu.id and tu.deleted = 0
+	</sql>
+	<sql id="QUERY_SELECT_FOR_LIST">
+		<include refid="QUERY_SELECT_FIELDS" />
+		from (select * from payment
+		<include refid="QUERY_WHERE_PAYMENT" />
+		) p
+		inner join transfer t on p.id = t.paymentid
+		inner join user fu on p.userid = fu.id and fu.deleted = 0
+		inner join user tu on t.to_user_id = tu.id and tu.deleted = 0
+		union
+		<include refid="QUERY_SELECT_FIELDS" />
+		from payment p
 		inner join (select * from transfer
 		<include refid="QUERY_WHERE_TRANSFER" />
 		) t on p.id = t.paymentid
@@ -45,7 +65,7 @@
 	<select id="count" resultType="java.lang.Integer">
 		select count(0)
 		from (
-		<include refid="QUERY_SELECT" />
+		<include refid="QUERY_SELECT_FOR_LIST" />
 		) t
 	</select>
 	<select id="get" resultType="TransferDO">
@@ -53,7 +73,7 @@
 		limit 1
 	</select>
 	<select id="list" resultType="TransferDO">
-		<include refid="QUERY_SELECT" />
+		<include refid="QUERY_SELECT_FOR_LIST" />
 		<include refid="QUERY_ORDER" />
 		<include refid="QUERY_PAGING" />
 	</select>

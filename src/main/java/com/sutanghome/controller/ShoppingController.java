@@ -39,6 +39,7 @@ public class ShoppingController extends BaseController {
 	@ResponseBody
 	public BaseListResponse<ShoppingDO> list(int pageIndex, int pageSize) {
 		SearchShoppingParam param = new SearchShoppingParam();
+		param.setUserId(account().getUserId());
 		param.setType(PaymentType.SHOPPING);
 		param.setPageIndex(pageIndex);
 		param.setPageSize(pageSize);

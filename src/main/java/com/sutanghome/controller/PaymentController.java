@@ -29,6 +29,7 @@ public class PaymentController extends BaseController {
 	@ResponseBody
 	public BaseListResponse<PaymentDO> list(int pageIndex, int pageSize) {
 		SearchPaymentParam param = new SearchPaymentParam();
+		param.setUserId(account().getUserId());
 		param.setPageIndex(pageIndex);
 		param.setPageSize(pageSize);
 		return paymentService.pageData(param);
