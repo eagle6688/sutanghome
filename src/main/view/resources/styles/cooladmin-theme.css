@@ -4246,6 +4246,14 @@ section {
     border-bottom: none;
 }
 
+.table thead th {
+    white-space: nowrap;
+}
+
+.table tbody td {
+    white-space: nowrap;
+}
+
 .table-wrap {
     display: -webkit-box;
     display: -webkit-flex;
