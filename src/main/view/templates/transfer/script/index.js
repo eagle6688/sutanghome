@@ -3,7 +3,8 @@ var page = {
     url_detail: '/transfer/detail',
     $list: $('#div-list'),
     vueHelper: null,
-    formModal: null
+    formModal: null,
+    userId: ~~$('#hid-userId').val()
 };
 
 page.init = function () {
@@ -20,6 +21,11 @@ page.bind = function () {
 page.bind_addBtn = function () {
     $('#btn-add').click(function () {
         page.formModal.add();
+
+        dataForm.set({
+            userId: page.userId,
+            toUserId: page.userId
+        });
     });
 };
 

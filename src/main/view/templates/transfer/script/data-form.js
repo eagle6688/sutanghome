@@ -23,9 +23,14 @@ dataForm.init = function () {
 
 dataForm.set = function (model) {
     $('#txt-id').val(model.id);
+    $('#select-user').val(model.userId);
     $('#select-toUserId').val(model.toUserId);
     devutility.select.setByText($('#select-medium')[0], model.medium);
-    $('#txt-time').val(model.time.substr(0, 10));
+
+    if (model.time) {
+        $('#txt-time').val(model.time.substr(0, 10));
+    }
+
     $('#txt-cost').val(model.cost);
     $('#txt-description').val(model.description);
 };

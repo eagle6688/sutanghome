@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sutanghome.common.constant.PaymentMedium;
 import com.sutanghome.common.constant.PaymentType;
 import com.sutanghome.dao.model.transfer.TransferDO;
+import com.sutanghome.model.Account;
 import com.sutanghome.model.transfer.AddTransferParam;
 import com.sutanghome.model.transfer.EditTransferParam;
 import com.sutanghome.model.transfer.SearchTransferParam;
@@ -41,8 +42,10 @@ public class TransferController extends BaseController {
 	@GetMapping("list")
 	@ResponseBody
 	public BaseListResponse<TransferDO> list(int pageIndex, int pageSize) {
+		Account account = account();
 		SearchTransferParam param = new SearchTransferParam();
-		param.setUserId(account().getUserId());
+		param.setUserId(account.getUserId());
+		param.setToUserId(account.getUserId());
 		param.setType(PaymentType.TRANSFER);
 		param.setPageIndex(pageIndex);
 		param.setPageSize(pageSize);

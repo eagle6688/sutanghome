@@ -8,6 +8,7 @@ import com.sutanghome.common.constant.PaymentType;
 
 public class PaymentDO {
 	private int id;
+	private int userId;
 	private String userName;
 	private PaymentType type;
 	private BigDecimal cost;
@@ -23,6 +24,14 @@ public class PaymentDO {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getUserName() {

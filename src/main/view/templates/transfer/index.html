@@ -52,6 +52,7 @@
     </div>
     <section th:fragment="section-partial">
         <div th:replace="~{partial/modal :: modal('div-modal', '保存转账记录', ~{transfer/partial/data-form :: #data-form})}"></div>
+        <input id="hid-userId" type="hidden" th:value="${userId}">
     </section>
     <script src="/templates/transfer/script/data-form.js?v=20190213"></script>
     <script src="/templates/transfer/script/index.js?v=20190213"></script>
