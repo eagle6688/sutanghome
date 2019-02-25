@@ -1,5 +1,5 @@
 /**
- * @license Background.js v20190224
+ * @license Background.js v20190225
  * (c) Aldwin. https://github.com/eagle6688
  * License: MIT
  */
@@ -80,11 +80,11 @@
     /* Public methods */
 
     Plugin.prototype.getScrollWidth = function () {
-        return Math.max(document.body.scrollWidth, document.documentElement.scrollWidth);
+        return Math.max(document.body ? document.body.scrollWidth : 0, document.documentElement ? document.documentElement.scrollWidth : 0);
     };
 
     Plugin.prototype.getScrollHeight = function () {
-        return Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        return Math.max(document.body ? document.body.scrollHeight : 0, document.documentElement ? document.documentElement.scrollHeight : 0);
     };
 
     Plugin.prototype.show = function () {
