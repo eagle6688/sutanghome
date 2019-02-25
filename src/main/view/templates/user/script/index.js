@@ -1,14 +1,28 @@
 var page = {
+    url_add: '/user/add',
+    url_edit: '/user/edit',
     url_list: '/user/list',
     url_detail: '/user/detail',
     url_delete: '/user/delete',
     $list: $('#div-list'),
     vueHelper: null,
+    addFormModal: null,
+    editFormModal: null,
     formModal: null
 };
 
 page.init = function () {
     selector.init();
+
+    page.addFormModal = new FormModal({
+        modalSelector: '#div-modal',
+        formSelector: '#data-form',
+        saveBtnSelector: '#div-modal-save',
+        saveUrl: page.url_add,
+        checkSaveResult: checkSaveResult,
+        afterSave: afterSave
+    });
+
     page.formModal = dataForm.init();
     page.bind();
 };

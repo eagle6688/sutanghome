@@ -124,9 +124,23 @@ var common = (function () {
         return vueHelper;
     };
 
+    common.loadingPopuper = new Popuper({
+        selector: '#img-loading'
+    });
+
+    common.checkSaveResult = function (result, modal) {
+        if (result.succeeded) {
+            return true;
+        }
+
+        alert(result.message);
+        return false;
+    };
+
     return {
         init: common.init,
-        bind_list: common.bind_list
+        bind_list: common.bind_list,
+        loadingPopuper: common.loadingPopuper
     };
 })();
 

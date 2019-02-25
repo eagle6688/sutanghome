@@ -19,8 +19,10 @@
     <script src="/resources/scripts/jquery.pagination.js"></script>
     <script src="/resources/scripts/jquery.vue.helper.js"></script>
     <script src="/resources/scripts/devutility.js"></script>
-    <script src="/resources/scripts/FormModal.js"></script>
-    <script src="/resources/scripts/common.js?v=20190213"></script>
+    <script src="/resources/scripts/Background.js"></script>
+    <script src="/resources/scripts/Popuper.js"></script>
+    <script src="/resources/scripts/FormModal.js?v=20190225"></script>
+    <script src="/resources/scripts/common.js?v=20190225"></script>
     <script src="/resources/scripts/selector.js"></script>
 </head>
 
@@ -41,6 +43,7 @@
     </div>
     <th:block th:replace="${partials}" />
     <th:block th:replace="${scripts}" />
+    <img id="img-loading" src="/resources/images/loading.gif" alt="Loading" style="display:none;" />
 </body>
 
 </html>
