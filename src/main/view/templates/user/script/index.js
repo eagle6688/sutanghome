@@ -2,28 +2,41 @@ var page = {
     url_add: '/user/add',
     url_edit: '/user/edit',
     url_list: '/user/list',
-    url_detail: '/user/detail',
     url_delete: '/user/delete',
+    url_pattern_detail: '/user/detail?id={0}',
     $list: $('#div-list'),
     vueHelper: null,
     addFormModal: null,
-    editFormModal: null,
-    formModal: null
+    editFormModal: null
 };
 
 page.init = function () {
     selector.init();
 
-    page.addFormModal = new FormModal({
-        modalSelector: '#div-modal',
-        formSelector: '#data-form',
-        saveBtnSelector: '#div-modal-save',
+    var addFormModalOptions = $.extend({}, common.formModalOptions, {
         saveUrl: page.url_add,
-        checkSaveResult: checkSaveResult,
-        afterSave: afterSave
+        afterSave: function (result, modal) {
+            if (result.succeeded) {
+                page.vueHelper.reload();
+            }
+        }
     });
 
-    page.formModal = dataForm.init();
+    page.addFormModal = new FormModal(addFormModalOptions);
+
+    var editFormModalOptions = $.extend({}, common.formModalOptions, {
+        loadFormDataBeforeShow: true,
+        formDataUrlFormat: page.url_pattern_detail,
+        formDataName: 'data',
+        saveUrl: page.url_edit,
+        afterSave: function (result, modal) {
+            if (result.succeeded) {
+                page.vueHelper.reload();
+            }
+        }
+    });
+
+    page.editFormModal = new FormModal(editFormModalOptions);
     page.bind();
 };
 
@@ -34,17 +47,12 @@ page.bind = function () {
 
 page.bind_addBtn = function () {
     $('#btn-add').click(function () {
-        page.formModal.add();
+        page.addFormModal.show();
     });
 };
 
 page.edit = function (id) {
-    var url = devutility.url.addParam(page.url_detail, 'id', id);
-
-    $.getJSON(url, function (result) {
-        page.formModal.edit();
-        dataForm.set(result.data);
-    });
+    page.editFormModal.show(id);
 };
 
 page.delete = function (id) {

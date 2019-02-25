@@ -17,6 +17,7 @@ var common = (function () {
             global: true,
             cache: false,
             error: function (xhr, status, error) {
+                common.loadingPopuper.hideAll();
                 alert('系统错误，请联系管理员！');
             }
         });
@@ -124,23 +125,44 @@ var common = (function () {
         return vueHelper;
     };
 
+    /* Popuper and FormModal */
+
     common.loadingPopuper = new Popuper({
         selector: '#img-loading'
     });
 
+    common.saveClick = function (modal) {
+        common.loadingPopuper.showAll();
+    };
+
     common.checkSaveResult = function (result, modal) {
+        common.loadingPopuper.hideAll();
+
+        if (result.message) {
+            alert(result.message);
+        }
+
         if (result.succeeded) {
             return true;
         }
 
-        alert(result.message);
         return false;
     };
+
+    common.formModalOptions = {
+        modalSelector: '#div-modal',
+        formSelector: '#data-form',
+        saveBtnSelector: '#div-modal-save',
+        saveClick: common.saveClick,
+        checkSaveResult: common.checkSaveResult
+    };
+
+    /* Popuper and FormModal End */
 
     return {
         init: common.init,
         bind_list: common.bind_list,
-        loadingPopuper: common.loadingPopuper
+        formModalOptions: common.formModalOptions
     };
 })();
 
