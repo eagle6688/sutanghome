@@ -1,15 +1,44 @@
 var page = {
+    url_add: '/transfer/add',
+    url_edit: '/transfer/edit',
     url_list: '/transfer/list',
-    url_detail: '/transfer/detail',
-    $list: $('#div-list'),
+    url_pattern_detail: '/transfer/detail?id={0}',
     vueHelper: null,
-    formModal: null,
+    addFormModal: null,
+    editFormModal: null,
+    $list: $('#div-list'),
     userId: ~~$('#hid-userId').val()
 };
 
 page.init = function () {
     selector.init();
-    page.formModal = dataForm.init();
+
+    var afterSave = function (result, modal) {
+        if (result.succeeded) {
+            page.vueHelper.reload();
+        }
+    };
+
+    var addFormModalOptions = $.extend({}, common.formModalOptions, {
+        saveUrl: page.url_add,
+        beforeShow: function () {
+            $('#select-user').val(page.userId);
+            $('#select-toUserId').val(page.userId);
+        },
+        afterSave: afterSave
+    });
+
+    page.addFormModal = new FormModal(addFormModalOptions);
+
+    var editFormModalOptions = $.extend({}, common.formModalOptions, {
+        loadFormDataBeforeShow: true,
+        formDataUrlFormat: page.url_pattern_detail,
+        formDataName: 'data',
+        saveUrl: page.url_edit,
+        afterSave: afterSave
+    });
+
+    page.editFormModal = new FormModal(editFormModalOptions);
     page.bind();
 };
 
@@ -20,22 +49,12 @@ page.bind = function () {
 
 page.bind_addBtn = function () {
     $('#btn-add').click(function () {
-        page.formModal.add();
-
-        dataForm.set({
-            userId: page.userId,
-            toUserId: page.userId
-        });
+        page.addFormModal.show();
     });
 };
 
 page.edit = function (id) {
-    var url = devutility.url.addParam(page.url_detail, 'id', id);
-
-    $.getJSON(url, function (result) {
-        page.formModal.edit();
-        dataForm.set(result.data);
-    });
+    page.editFormModal.show(id);
 };
 
 page.init();

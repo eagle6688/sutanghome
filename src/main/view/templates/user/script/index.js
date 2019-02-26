@@ -13,13 +13,15 @@ var page = {
 page.init = function () {
     selector.init();
 
+    var afterSave = function (result, modal) {
+        if (result.succeeded) {
+            page.vueHelper.reload();
+        }
+    };
+
     var addFormModalOptions = $.extend({}, common.formModalOptions, {
         saveUrl: page.url_add,
-        afterSave: function (result, modal) {
-            if (result.succeeded) {
-                page.vueHelper.reload();
-            }
-        }
+        afterSave: afterSave
     });
 
     page.addFormModal = new FormModal(addFormModalOptions);
@@ -29,11 +31,7 @@ page.init = function () {
         formDataUrlFormat: page.url_pattern_detail,
         formDataName: 'data',
         saveUrl: page.url_edit,
-        afterSave: function (result, modal) {
-            if (result.succeeded) {
-                page.vueHelper.reload();
-            }
-        }
+        afterSave: afterSave
     });
 
     page.editFormModal = new FormModal(editFormModalOptions);
