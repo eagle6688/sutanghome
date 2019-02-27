@@ -34,6 +34,13 @@ page.init = function () {
         loadFormDataBeforeShow: true,
         formDataUrlFormat: page.url_pattern_detail,
         formDataName: 'data',
+        afterSetFormData: function (result, modal) {
+            devutility.select.setByText($('#select-medium')[0], result.data.medium);
+
+            if (model.time) {
+                $('#txt-time').val(result.data.time.substr(0, 10));
+            }
+        },
         saveUrl: page.url_edit,
         afterSave: afterSave
     });

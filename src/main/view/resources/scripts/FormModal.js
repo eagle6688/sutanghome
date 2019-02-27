@@ -1,5 +1,5 @@
 /**
- * @license FormModal.js v20190223
+ * @license FormModal.js v20190227
  * (c) Aldwin. https://github.com/eagle6688
  * License: MIT
  */
@@ -19,6 +19,7 @@
         afterRequestFormData: function (result, modal) { //Event after request form data, FormModal does nothing if this method returns false, for example validating response from formDataUrl.
             return true;
         },
+        afterSetFormData: function (result, modal) {}, //Event after set form data.
         saveClick: function (modal) {}, //Event while clicking save button.
         checkSaveResult: function (result, modal) { //Event for validating result data from save url, FormModal does nothing if validation failed.
             return true;
@@ -100,6 +101,12 @@
         return true;
     };
 
+    Plugin.prototype._afterSetFormData = function (result, modal) {
+        if (this.options.afterSetFormData) {
+            this.options.afterSetFormData(result, modal);
+        }
+    };
+
     Plugin.prototype._saveClick = function () {
         var self = this;
 
@@ -153,6 +160,7 @@
 
             var data = self._getFormDataFromResult(result);
             self._setForm(data);
+            self._afterSetFormData(result, modal);
             callback();
         });
     };
