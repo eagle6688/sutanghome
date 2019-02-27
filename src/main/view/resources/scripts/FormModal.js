@@ -8,6 +8,7 @@
     var pluginName = 'FormModal';
 
     var defaults = {
+        cloneModal: false, //Whether clone a modal or not?
         modalSelector: null, //Selector for modal.
         formSelector: null, //Selector for form.
         saveBtnSelector: null, //Selector for save button.
@@ -27,6 +28,11 @@
         afterSave: function (result, modal) {} //Event after saved form data.
     };
 
+    var config = {
+        indexName: 'data-form-modal-index',
+        currentIndexName: 'data-form-modal-current-index'
+    };
+
     function Plugin(options) {
         this.options = $.extend({}, defaults, options);
         this._init();
@@ -39,9 +45,15 @@
             return;
         }
 
-        this.$modal = $(this.options.modalSelector).clone();
+        this.$modal = $(this.options.modalSelector);
+
+        if (this.options.cloneModal) {
+            this.$modal = this.$modal.clone();
+        }
+
         this.$form = this.$modal.find(this.options.formSelector);
         this.$saveBtn = this.$modal.find(this.options.saveBtnSelector);
+        this._initIndex();
         this._bind();
     };
 
@@ -75,17 +87,30 @@
         return true;
     };
 
+    Plugin.prototype._initIndex = function () {
+        this.index = ~~this.$modal.data(config.indexName) + 1;
+        this.$modal.data(config.indexName, this.index);
+    };
+
     Plugin.prototype._bind = function () {
         var self = this;
 
         this.$saveBtn.click(function () {
-            self._saveClick(self);
+            if (self.index == self.$modal.data(config.currentIndexName)) {
+                self._saveClick(self);
+            }
         });
     };
 
     /* Events start */
 
     Plugin.prototype._beforeShow = function (paramters, callback) {
+        this._setCurrentIndex();
+
+        if (!this.options.cloneModal) {
+            this.clear();
+        }
+
         if (this.options.beforeShow) {
             this.options.beforeShow(this);
         }
@@ -137,6 +162,7 @@
         }
 
         this.hide();
+        this.clear();
     };
 
     /* Events end */
@@ -239,6 +265,10 @@
         $.post(this.options.saveUrl, data, function (data) {
             callback(data);
         });
+    };
+
+    Plugin.prototype._setCurrentIndex = function () {
+        this.$modal.data(config.currentIndexName, this.index);
     };
 
     /* Public methods */
