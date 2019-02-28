@@ -37,7 +37,7 @@ page.init = function () {
         afterSetFormData: function (result, modal) {
             devutility.select.setByText($('#select-medium')[0], result.data.medium);
 
-            if (model.time) {
+            if (result.data.time) {
                 $('#txt-time').val(result.data.time.substr(0, 10));
             }
         },

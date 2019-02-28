@@ -1,5 +1,5 @@
 /**
- * @license FormModal.js v20190227
+ * @license FormModal.js v20190228
  * (c) Aldwin. https://github.com/eagle6688
  * License: MIT
  */
@@ -186,7 +186,7 @@
 
             var data = self._getFormDataFromResult(result);
             self._setForm(data);
-            self._afterSetFormData(result, modal);
+            self._afterSetFormData(result, self);
             callback();
         });
     };

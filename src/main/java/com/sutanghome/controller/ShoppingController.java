@@ -16,6 +16,7 @@ import com.sutanghome.model.shopping.AddShoppingParam;
 import com.sutanghome.model.shopping.EditShoppingParam;
 import com.sutanghome.model.shopping.SearchShoppingParam;
 import com.sutanghome.service.ShoppingService;
+import com.sutanghome.service.UserService;
 
 import devutility.internal.models.BaseListResponse;
 import devutility.internal.models.BaseResponse;
@@ -27,9 +28,13 @@ public class ShoppingController extends BaseController {
 	@Autowired
 	private ShoppingService shoppingService;
 
+	@Autowired
+	private UserService userService;
+
 	@GetMapping("index")
 	public String index(Model model) {
 		model.addAttribute("title", "购物记录");
+		model.addAttribute("users", userService.listKV());
 		model.addAttribute("shoppingChannels", ShoppingChannel.listKV());
 		model.addAttribute("paymentMediums", PaymentMedium.listKV());
 		return "shopping/index";
