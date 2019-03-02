@@ -32,7 +32,7 @@
 		inner join user u on p.userid = u.id and u.deleted = 0
 	</sql>
 	<sql id="QUERY_ORDER">
-		order by created desc
+		order by time desc, created desc
 	</sql>
 	<sql id="QUERY_PAGING">
 		<if test="skip >= 0 and take > 0">limit #{skip}, #{take}</if>
