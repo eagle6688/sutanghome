@@ -26,7 +26,17 @@ public enum PaymentMedium {
 	/**
 	 * 微信
 	 */
-	WECHAT(3, "微信");
+	WECHAT(3, "微信"),
+
+	/**
+	 * Bank of China post.
+	 */
+	PSBC(4, "中国邮政银行"),
+
+	/**
+	 * 山东省农村信用社
+	 */
+	SDNCXYS(5, "山东省农村信用社");
 
 	private int value;
 	private String name;
