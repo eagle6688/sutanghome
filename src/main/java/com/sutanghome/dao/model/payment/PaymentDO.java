@@ -15,6 +15,7 @@ public class PaymentDO {
 	private PaymentMedium medium;
 	private Date time;
 	private String description;
+	private int creatorId;
 	private Date created;
 	private Date updated;
 
@@ -80,6 +81,14 @@ public class PaymentDO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(int creatorId) {
+		this.creatorId = creatorId;
 	}
 
 	public Date getCreated() {

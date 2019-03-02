@@ -22,9 +22,8 @@ public class EditShoppingParam extends AddShoppingParam {
 		this.id = id;
 	}
 
-	@Override
 	public Payment toPayment() {
-		Payment entity = super.toPayment();
+		Payment entity = super.toPayment(0);
 		entity.setId(id);
 		return entity;
 	}

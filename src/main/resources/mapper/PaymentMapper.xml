@@ -8,6 +8,7 @@
 		<if test="cost > 0">and cost = #{cost}</if>
 		<if test="medium != null">and medium = #{medium}</if>
 		<if test="description != null and description != ''">and description = #{description}</if>
+		<if test="creatorId > 0">and creatorid = #{creatorId}</if>
 	</sql>
 	<sql id="QUERY_WHERE_NOTEQUAL">
 		<where>
@@ -25,7 +26,7 @@
 		</where>
 	</sql>
 	<sql id="QUERY_SELECT">
-		select p.id, u.name userName, p.type, p.cost, p.medium, p.time, p.description, p.created, p.updated
+		select p.id, u.name userName, p.type, p.cost, p.medium, p.time, p.description, p.creatorid, p.created, p.updated
 		from (select * from payment
 		<include refid="QUERY_WHERE" />
 		) p
@@ -39,8 +40,8 @@
 	</sql>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		insert into payment (userid, type, cost, medium, time, description)
-		values (#{userId}, #{type}, #{cost}, #{medium}, #{time}, #{description})
+		insert into payment (userid, type, cost, medium, time, description, creatorid)
+		values (#{userId}, #{type}, #{cost}, #{medium}, #{time}, #{description}, #{creatorId})
 	</insert>
 	<select id="count" resultType="java.lang.Integer">
 		select count(0)

@@ -34,9 +34,8 @@
                             <td>{{item.created}}</td>
                             <td>{{item.updated}}</td>
                             <td>
-                                <div class="table-data-feature justify-content-md-center">
-                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Edit"
-                                        v-on:click="page.edit(item.id)">
+                                <div class="table-data-feature justify-content-md-center" v-if="item.creatorId == common.userId">
+                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Edit" v-on:click="page.edit(item.id)">
                                         <i class="zmdi zmdi-edit"></i>
                                     </button>
                                 </div>

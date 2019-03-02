@@ -22,7 +22,6 @@
     <script src="/resources/scripts/Background.js"></script>
     <script src="/resources/scripts/Popuper.js"></script>
     <script src="/resources/scripts/FormModal.js?v=2019022701"></script>
-    <script src="/resources/scripts/common.js?v=20190225"></script>
     <script src="/resources/scripts/selector.js"></script>
 </head>
 
@@ -41,9 +40,11 @@
             </div>
         </div>
     </div>
+    <input id="hid-userId" type="hidden" th:value="${userId}">
+    <img id="img-loading" src="/resources/images/loading.gif" alt="Loading" style="display:none;" />
+    <script src="/resources/scripts/common.js?v=20190302"></script>
     <th:block th:replace="${partials}" />
     <th:block th:replace="${scripts}" />
-    <img id="img-loading" src="/resources/images/loading.gif" alt="Loading" style="display:none;" />
 </body>
 
 </html>

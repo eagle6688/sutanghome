@@ -13,6 +13,7 @@ public class Payment extends BaseEntity {
 	private PaymentMedium medium;
 	private Date time;
 	private String description;
+	private int creatorId;
 
 	public int getUserId() {
 		return userId;
@@ -60,5 +61,13 @@ public class Payment extends BaseEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(int creatorId) {
+		this.creatorId = creatorId;
 	}
 }

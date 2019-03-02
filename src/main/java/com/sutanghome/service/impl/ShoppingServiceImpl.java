@@ -10,6 +10,7 @@ import com.sutanghome.dao.mapper.PaymentMapper;
 import com.sutanghome.dao.mapper.ShoppingMapper;
 import com.sutanghome.dao.model.shopping.ShoppingDO;
 import com.sutanghome.dao.model.shopping.ShoppingQueryModel;
+import com.sutanghome.model.Account;
 import com.sutanghome.model.shopping.AddShoppingParam;
 import com.sutanghome.model.shopping.EditShoppingParam;
 import com.sutanghome.model.shopping.SearchShoppingParam;
@@ -19,7 +20,7 @@ import devutility.internal.models.BaseListResponse;
 import devutility.internal.models.BaseResponse;
 
 @Service
-public class ShoppingServiceImpl implements ShoppingService {
+public class ShoppingServiceImpl extends BaseServiceImpl implements ShoppingService {
 	@Autowired
 	private PaymentMapper paymentMapper;
 
@@ -29,7 +30,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Transactional
 	@Override
 	public void add(AddShoppingParam param) {
-		Payment payment = param.toPayment();
+		Account account = account();
+		Payment payment = param.toPayment(account.getUserId());
 
 		if (paymentMapper.count(payment) > 0) {
 			throw new IllegalArgumentException("支付数据重复！");

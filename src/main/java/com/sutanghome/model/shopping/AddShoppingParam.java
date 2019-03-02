@@ -41,8 +41,8 @@ public class AddShoppingParam extends AddPaymentParam {
 	}
 
 	@Override
-	public Payment toPayment() {
-		Payment payment = super.toPayment();
+	public Payment toPayment(int creatorId) {
+		Payment payment = super.toPayment(creatorId);
 		payment.setType(PaymentType.SHOPPING);
 		return payment;
 	}

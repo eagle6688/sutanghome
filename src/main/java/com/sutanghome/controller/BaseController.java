@@ -8,10 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.sutanghome.cache.AccountCache;
-import com.sutanghome.common.config.SystemConfig;
+import com.sutanghome.common.AccountUtils;
 import com.sutanghome.model.Account;
-
-import devutility.external.servlet.http.CookieUtils;
 
 public abstract class BaseController {
 	@Autowired
@@ -24,12 +22,11 @@ public abstract class BaseController {
 	private AccountCache accountCache;
 
 	protected String sessionId() {
-		return CookieUtils.getValue(request, SystemConfig.COOKIE_JSESSIONID);
+		return AccountUtils.sessionId(request);
 	}
 
 	protected Account account() {
-		String sessionId = sessionId();
-		return accountCache.get(sessionId);
+		return AccountUtils.account(request, accountCache);
 	}
 
 	@ModelAttribute

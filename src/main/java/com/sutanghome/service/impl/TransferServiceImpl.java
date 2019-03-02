@@ -10,6 +10,7 @@ import com.sutanghome.dao.mapper.PaymentMapper;
 import com.sutanghome.dao.mapper.TransferMapper;
 import com.sutanghome.dao.model.transfer.TransferDO;
 import com.sutanghome.dao.model.transfer.TransferQueryModel;
+import com.sutanghome.model.Account;
 import com.sutanghome.model.transfer.AddTransferParam;
 import com.sutanghome.model.transfer.EditTransferParam;
 import com.sutanghome.model.transfer.SearchTransferParam;
@@ -19,7 +20,7 @@ import devutility.internal.models.BaseListResponse;
 import devutility.internal.models.BaseResponse;
 
 @Service
-public class TransferServiceImpl implements TransferService {
+public class TransferServiceImpl extends BaseServiceImpl implements TransferService {
 	@Autowired
 	private PaymentMapper paymentMapper;
 
@@ -29,7 +30,8 @@ public class TransferServiceImpl implements TransferService {
 	@Transactional
 	@Override
 	public void add(AddTransferParam param) {
-		Payment payment = param.toPayment();
+		Account account = account();
+		Payment payment = param.toPayment(account.getUserId());
 
 		if (paymentMapper.count(payment) > 0) {
 			throw new IllegalArgumentException("Payment已经存在！");

@@ -7,6 +7,7 @@ import com.sutanghome.dao.entities.Payment;
 import com.sutanghome.dao.mapper.PaymentMapper;
 import com.sutanghome.dao.model.payment.PaymentDO;
 import com.sutanghome.dao.model.payment.PaymentQueryModel;
+import com.sutanghome.model.Account;
 import com.sutanghome.model.payment.AddPaymentParam;
 import com.sutanghome.model.payment.EditPaymentParam;
 import com.sutanghome.model.payment.SearchPaymentParam;
@@ -15,13 +16,14 @@ import com.sutanghome.service.PaymentService;
 import devutility.internal.models.BaseListResponse;
 
 @Service
-public class PaymentServiceImpl implements PaymentService {
+public class PaymentServiceImpl extends BaseServiceImpl implements PaymentService {
 	@Autowired
 	private PaymentMapper paymentMapper;
 
 	@Override
 	public void add(AddPaymentParam param) {
-		Payment entity = param.toPayment();
+		Account account = account();
+		Payment entity = param.toPayment(account.getUserId());
 
 		if (paymentMapper.count(entity) > 0) {
 			throw new IllegalArgumentException("Payment已经存在！");

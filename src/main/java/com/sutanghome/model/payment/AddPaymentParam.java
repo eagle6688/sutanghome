@@ -88,7 +88,7 @@ public class AddPaymentParam {
 		this.description = description;
 	}
 
-	public Payment toPayment() {
+	public Payment toPayment(int creatorId) {
 		Payment entity = new Payment();
 		entity.setUserId(userId);
 		entity.setType(type);
@@ -96,6 +96,7 @@ public class AddPaymentParam {
 		entity.setMedium(medium);
 		entity.setTime(time);
 		entity.setDescription(description);
+		entity.setCreatorId(creatorId);
 		return entity;
 	}
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sutanghome.dao.mapper.TransferMapper">
 	<sql id="QUERY_SELECT_FIELDS">
-		select p.id, p.userid userId, fu.name userName, p.type, t.to_user_id toUserId, tu.name toUser, p.cost, p.medium, p.time, p.description, p.created, p.updated
+		select p.id, p.userid userId, fu.name userName, p.type, t.to_user_id toUserId, tu.name toUser, p.cost, p.medium, p.time, p.description, p.creatorid, p.created, p.updated
 	</sql>
 	<sql id="QUERY_SELECT">
 		<include refid="QUERY_SELECT_FIELDS" />

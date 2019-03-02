@@ -6,8 +6,7 @@ var page = {
     vueHelper: null,
     addFormModal: null,
     editFormModal: null,
-    $list: $('#div-list'),
-    userId: ~~$('#hid-userId').val()
+    $list: $('#div-list')
 };
 
 page.init = function () {
@@ -22,8 +21,8 @@ page.init = function () {
     var addFormModalOptions = $.extend({}, common.formModalOptions, {
         saveUrl: page.url_add,
         beforeShow: function () {
-            $('#select-user').val(page.userId);
-            $('#select-toUserId').val(page.userId);
+            $('#select-user').val(common.userId);
+            $('#select-toUserId').val(common.userId);
         },
         afterSave: afterSave
     });
