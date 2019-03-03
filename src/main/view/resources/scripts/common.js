@@ -128,14 +128,6 @@ common.bind_list = function ($list, listUrl) {
 
 /* Popuper and FormModal */
 
-common.formModalOptions = {
-    modalSelector: '#div-modal',
-    formSelector: '#data-form',
-    saveBtnSelector: '#div-modal-save',
-    saveClick: common._saveClick,
-    checkSaveResult: common._checkSaveResult
-};
-
 common.loadingPopuper = new Popuper({
     selector: '#img-loading'
 });
@@ -156,6 +148,14 @@ common._checkSaveResult = function (result, modal) {
     }
 
     return false;
+};
+
+common.formModalOptions = {
+    modalSelector: '#div-modal',
+    formSelector: '#data-form',
+    saveBtnSelector: '#div-modal-save',
+    saveClick: common._saveClick,
+    checkSaveResult: common._checkSaveResult
 };
 
 /* Popuper and FormModal end */
