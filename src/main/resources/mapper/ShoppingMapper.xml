@@ -15,7 +15,17 @@
 		<where>
 			deleted = 0
 			<if test="id != null and id > 0">and id = #{id}</if>
-			<if test="userId != null and userId > 0">and userid = #{userId}</if>
+			<choose>
+				<when test="userId > 0 and creatorId > 0">
+					and (userid = #{userId} or creatorid = #{creatorId})
+				</when>
+				<when test="userId > 0 and creatorId = 0">
+					and userid = #{userId}
+				</when>
+				<when test="userId = 0 and creatorId > 0">
+					and creatorid = #{creatorId}
+				</when>
+			</choose>
 			<if test="type != null">and type = #{type}</if>
 			<if test="cost > 0">and cost = #{cost}</if>
 			<if test="medium != null">and medium = #{medium}</if>

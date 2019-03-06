@@ -30,7 +30,7 @@ public class SearchPaymentParam {
 
 	@Min(value = 1, message = "请输入正确的pageIndex！")
 	private int pageIndex;
-	
+
 	@Min(value = 1, message = "请输入正确的pageSize！")
 	private int pageSize;
 	private Date startTime;
@@ -138,6 +138,7 @@ public class SearchPaymentParam {
 		model.setMedium(getMedium());
 		model.setTime(getTime());
 		model.setDescription(getDescription());
+		model.setCreatorId(getUserId());
 		return model;
 	}
 }
