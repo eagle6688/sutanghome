@@ -1,5 +1,7 @@
 package com.sutanghome.service.impl;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.sutanghome.model.Account;
 import com.sutanghome.model.sign.SignInParam;
 import com.sutanghome.service.SignService;
 
+import devutility.external.servlet.http.CookieUtils;
 import devutility.internal.models.OperationResult;
 
 @Service
@@ -50,5 +53,11 @@ public class SignServiceImpl implements SignService {
 
 		accountCache.del(account.getSessionId());
 		return result;
+	}
+
+	@Override
+	public void refreshCache(HttpServletResponse response, Account account) {
+		CookieUtils.set(response, SystemConfig.COOKIE_JSESSIONID, account.getSessionId(), null, "/", SystemConfig.COOKIE_JSESSIONID_EXPIRESECONDS);
+		accountCache.set(account);
 	}
 }

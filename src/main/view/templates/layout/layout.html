@@ -2,7 +2,7 @@
 <html th:fragment="layout(links, content, partials, scripts)" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{partial/head-resource :: head-resource(~{::link}, ~{::script})}">
-    <link href="/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="/vendors/bootstrap/css/bootstrap.min.css?v=4.3.1" rel="stylesheet" media="all">
     <link href="/resources/styles/font-face.css" rel="stylesheet" media="all">
     <link href="/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
     <link href="/vendors/font-awesome/css/all.min.css" rel="stylesheet" media="all">
@@ -12,16 +12,16 @@
     <link href="/resources/styles/cooladmin-theme.css?v=20190214" rel="stylesheet" media="all">
     <th:block th:replace="${links}" />
     <script src="/resources/scripts/jquery-1.12.4.min.js"></script>
-    <script src="/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/vendors/bootstrap/js/bootstrap.min.js?v=4.3.1"></script>
     <script src="/resources/scripts/vue.min.js"></script>
     <script src="/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/vendors/select2/select2.min.js"></script>
-    <script src="/resources/scripts/jquery.pagination.js"></script>
-    <script src="/resources/scripts/jquery.vue.helper.js"></script>
-    <script src="/resources/scripts/devutility.js"></script>
-    <script src="/resources/scripts/Background.js"></script>
-    <script src="/resources/scripts/Popuper.js"></script>
-    <script src="/resources/scripts/FormModal.js?v=2019022701"></script>
+    <script src="/resources/scripts/devutility.js?v=20190309"></script>
+    <script src="/resources/scripts/jquery.pagination.js?v=20190309"></script>
+    <script src="/resources/scripts/jquery.vue.helper.js?v=20190309"></script>
+    <script src="/resources/scripts/Background.js?v=20190309"></script>
+    <script src="/resources/scripts/Popuper.js?v=20190309"></script>
+    <script src="/resources/scripts/FormModal.js?v=20190309"></script>
     <script src="/resources/scripts/selector.js"></script>
 </head>
 
@@ -42,7 +42,10 @@
     </div>
     <input id="hid-userId" type="hidden" th:value="${userId}">
     <img id="img-loading" src="/resources/images/loading.gif" alt="Loading" style="display:none;" />
-    <script src="/resources/scripts/common.js?v=20190303"></script>
+    <div id="div-loading" class="spinner-border text-danger" role="status" style="width: 3rem; height: 3rem; display:none;">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <script src="/resources/scripts/common.js?v=20190309"></script>
     <th:block th:replace="${partials}" />
     <th:block th:replace="${scripts}" />
 </body>

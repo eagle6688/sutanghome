@@ -1,96 +1,108 @@
 /**
- * @license jquery.vue.helper.js v20190202
- * (c) 2010-2019 Aldwin. https://github.com/eagle6688
- * License: MIT
+ * jquery.vue.helper.js v20190309
+ * dependency: jQuery.js, vue.js, devutility.js
+ * @license: MIT (c) Aldwin Su. https://github.com/eagle6688
  */
 
 (function ($, window, document, undefined) {
     var pluginName = 'vueHelper';
 
     var defaults = {
-        url: '',
-        requestType: 'GET',
-        requestData: null,
-        viewModel: null,
-        vueConfig: null,
-        pageSize: 10,
-        autoLoad: true,
-        loadingDom: '', //Dom displays when data are loading.
-        beforeLoadData: function (data) {},
-        afterLoadData: function (data) {},
-        onReload: function (data) {}
-    };
-
-    var events = {
-        init: 1,
-        reload: 2,
-        changePage: 3
+        url: '', //Base url for request data.
+        pageIndex: 1, //Page index parameter in request url.
+        pageSize: 10, //Page size parameter in request url.
+        autoLoad: true, //Plugin would automatic request data when initializing.
+        ajaxOptions: {
+            type: 'GET',
+            cache: false,
+            dataType: 'json',
+        }, //Jquery ajax options for request backend data.
+        vueOptions: {
+            data: {
+                count: 0,
+                data: []
+            }
+        }, //Initial options for Vue object.
+        beforeRequestData: function () {}, //Event triggered before request data, for example display loading element.
+        beforeLoadData: function (data) {}, //Event triggered before set view model but after requested data.
+        afterLoadData: function (data) {} //Event triggered after set view model.
     };
 
     function Plugin(element, options) {
-        this.element = element;
         this.$element = $(element);
-        this.selector = '#' + this.$element.attr('id');
-        this.options = $.extend({}, defaults, options);
+        this.options = $.extend(true, {}, defaults, options);
+        this.vueOptions = this.options.vueOptions;
         this._init();
     }
 
     Plugin.prototype.constructor = Plugin;
 
+    /* Init */
+
     Plugin.prototype._init = function () {
-        this.event = events.init;
-        this._initData();
+        if (!this._verify()) {
+            return;
+        }
+
         this._initVue();
-        this._load();
+        this._initData();
     };
 
-    Plugin.prototype._initData = function () {
-        this.pageIndex = 1;
+    Plugin.prototype._verify = function () {
+        if (!this.$element.attr('id')) {
+            console.error('Invalid value of attribute "id"!');
+            return false;
+        }
 
-        this.viewModel = {
-            data: [],
-            count: 0
-        };
+        return true;
     };
 
     Plugin.prototype._initVue = function () {
-        var defaults = {
-            el: this.selector,
-            data: this.viewModel
-        };
+        this.selector = '#' + this.$element.attr('id');
 
-        var options = $.extend({}, this.options.vueConfig, defaults);
-        this.vue = new Vue(options);
+        if (!this.options.vueOptions.hasOwnProperty('el')) {
+            this.options.vueOptions.el = this.selector;
+        }
+
+        this.vue = new Vue(this.options.vueOptions);
     };
+
+    Plugin.prototype._initData = function () {
+        if (this.options.autoLoad) {
+            this._load();
+        }
+    };
+
+    /* Init end */
+
+    /* Methods */
 
     Plugin.prototype._load = function () {
-        if (this.options.autoLoad) {
-            this._loadData();
-        }
+        this._beforeRequestData();
+        this._ajax();
     };
 
-    Plugin.prototype._loadData = function () {
-        if (this.options.viewModel) {
-            this._loadViewModel(this.options.viewModel);
-            this.options.viewModel = null;
-        } else if (this.options.url) {
-            this._requestData();
-        }
-    };
-
-    Plugin.prototype._requestData = function () {
+    Plugin.prototype._ajax = function () {
         var self = this;
-        var url = getPageUrl(this.options.url, this.pageIndex, this.options.pageSize);
-        this._displayDom(this.options.loadingDom);
+        var options = this.options.ajaxOptions;
+        options.url = this._ajaxUrl();
 
-        this._ajax(url, function (data) {
-            self._loadViewModel(data);
-            self._hideDom(self.options.loadingDom);
-        });
+        options.success = function (data) {
+            self._ajaxSuccess(data);
+        };
+
+        $.ajax(options);
     };
 
-    Plugin.prototype._loadViewModel = function (data) {
-        this._onReload(data);
+    Plugin.prototype._ajaxUrl = function () {
+        var url = this.options.url;
+        url = devutility.url.addParam(url, 'pageIndex', this.options.pageIndex);
+        url = devutility.url.addParam(url, 'pageSize', this.options.pageSize);
+        url = devutility.url.addParam(url, 'skip', (this.options.pageIndex - 1) * this.options.pageSize);
+        return url;
+    };
+
+    Plugin.prototype._ajaxSuccess = function (data) {
         this._beforeLoadData(data);
         this._setViewModel(data);
         this._afterLoadData(data);
@@ -101,45 +113,15 @@
         this.vue.data = data.data;
     };
 
-    Plugin.prototype._ajax = function (url, success) {
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            type: this.options.requestType,
-            data: this.options.requestData,
-            cache: false,
-            success: function (data) {
-                if (success) {
-                    success(data);
-                }
-            }
-        });
-    };
+    /* Methods end */
 
-    Plugin.prototype._reloadOptions = function (options) {
-        var newOptions = $.extend(true, {}, options);
-        this.options = $.extend({}, this.options, newOptions);
-    };
+    /* Events */
 
-    Plugin.prototype._reloadOption = function (name, value) {
-        if (this.options.hasOwnProperty(name)) {
-            this.options[name] = clone(value);
+    Plugin.prototype._beforeRequestData = function () {
+        if (this.options.beforeRequestData) {
+            this.options.beforeRequestData();
         }
     };
-
-    Plugin.prototype._displayDom = function (selector) {
-        if (selector && $(selector).length > 0) {
-            $(selector).show();
-        }
-    };
-
-    Plugin.prototype._hideDom = function (selector) {
-        if (selector && $(selector).length > 0) {
-            $(selector).hide();
-        }
-    };
-
-    //events
 
     Plugin.prototype._beforeLoadData = function (data) {
         if (this.options.beforeLoadData) {
@@ -153,42 +135,9 @@
         }
     };
 
-    Plugin.prototype._onReload = function (data) {
-        if (this.event !== events.init && this.event !== events.reload) {
-            return;
-        }
+    /* Events end */
 
-        if (this.options.onReload) {
-            this.options.onReload(data);
-        }
-    };
-
-    //inner functions
-
-    var getPageUrl = function (url, pageIndex, pageSize) {
-        if (url.indexOf('?') > 0) {
-            url += '&';
-        } else {
-            url += '?';
-        }
-
-        var skip = (pageIndex - 1) * pageSize;
-        url += 'pageIndex=' + pageIndex;
-        url += '&pageSize=' + pageSize;
-        url += '&skip=' + skip;
-        return url;
-    };
-
-    var clone = function (value) {
-        var obj = {
-            value: value
-        };
-
-        var newObject = $.extend(true, {}, obj);
-        return newObject.value;
-    };
-
-    //exported methods
+    /* Public methods */
 
     var restore = function (vueObject) {
         var result = null;
@@ -220,7 +169,7 @@
         }
 
         function toObject(vueObject) {
-            var obj = new object();
+            var obj = new Object();
 
             for (var index in vueObject) {
                 var item = restore(vueObject[index]);
@@ -233,50 +182,22 @@
         return result;
     };
 
-    Plugin.prototype.changePage = function (pageIndex) {
-        this.event = events.changePage;
-        this.pageIndex = pageIndex;
-        this._requestData();
-    };
-
-    Plugin.prototype.changePageAndOptions = function (pageIndex, options) {
-        if (options) {
-            this._reloadOptions(options);
-        }
-
-        this.changePage(pageIndex);
-    };
-
-    Plugin.prototype.reload = function () {
-        this.event = events.reload;
-
-        if (arguments.length === 1) {
-            var type = typeof arguments[0];
-
-            switch (type) {
-                case 'number':
-                    this.pageIndex = arguments[0];
-                    break;
-
-                case 'object':
-                    this._reloadOptions(arguments[0]);
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        if (arguments.length === 2) {
-            this._reloadOption(arguments[0], arguments[1]);
-        }
-
-        this._loadData();
-    };
-
-    Plugin.prototype.get = function (name) {
+    Plugin.prototype.getOption = function (name) {
         return this.options[name];
     };
+
+    Plugin.prototype.reload = function (options) {
+        this.options = $.extend(true, {}, this.options, options);
+        this._load();
+    };
+
+    Plugin.prototype.changePageIndex = function (pageIndex) {
+        this.reload({
+            pageIndex: pageIndex
+        });
+    };
+
+    /* Public methods end */
 
     $[pluginName] = {
         restore: restore

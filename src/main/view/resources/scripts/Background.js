@@ -1,102 +1,60 @@
 /**
- * @license Background.js v20190225
- * (c) Aldwin. https://github.com/eagle6688
- * License: MIT
+ * Background.js v20190310
+ * dependency: jQuery.js, devutility.js
+ * @license: License: MIT (c) Aldwin Su. https://github.com/eagle6688
  */
 
 (function ($, window, document, undefined) {
     var pluginName = 'Background';
 
     var defaults = {
-        backgroundId: 'background', //Id for background, default is 'background'.
-        zIndex: 100 //zIndex for background.
+        id: 'background', //Id for background.
+        zIndex: 2000 //zIndex for background.
     };
 
     function Plugin(options) {
         this.options = $.extend({}, defaults, options);
-        this._init();
-        this._bind();
+        this.$element = this._get();
     }
 
     Plugin.prototype.constructor = Plugin;
 
-    Plugin.prototype._init = function () {
-        this.id = this._getId();
-        this.$element = $(document.getElementById(this.id));
+    /* methods */
 
-        if (this.$element.length == 0) {
-            this._createBackground();
-        }
-    };
+    Plugin.prototype._get = function () {
+        var $background = $(document.getElementById(this.options.id));
 
-    Plugin.prototype._bind = function () {
-        var self = this;
-
-        $(window).resize(function () {
-            self._setSize();
-        });
-    };
-
-    Plugin.prototype._getId = function () {
-        if (!this.options.backgroundId) {
-            this.options.backgroundId = defaults.backgroundId;
+        if ($background.length > 0) {
+            return $background;
         }
 
-        return this.options.backgroundId;
-    };
-
-    Plugin.prototype._createBackground = function () {
-        this.$element = $('<div></div>').attr('id', this.id);
-
-        this.$element.css({
+        $background = $('<div></div>').attr('id', this.options.id).css({
             display: 'none',
             zIndex: this.options.zIndex,
-            backgroundColor: '#ccc',
-            left: 0,
+            background: '#ccc',
             top: 0,
-            /*IE*/
+            right: 0,
+            bottom: 0,
+            left: 0,
             filter: 'alpha(opacity=50)',
-            /*FF*/
-            opacity: '0.5',
-            /*FF IE7*/
-            position: 'fixed !important',
-            /*IE6*/
-            position: 'absolute'
+            opacity: 0.5,
+            position: 'fixed'
         });
 
-        this._setSize();
-        $('body').append(this.$element);
+        $('body').append($background);
+        return $background;
     };
 
-    Plugin.prototype._setSize = function () {
-        this.$element.css({
-            width: this.getScrollWidth(),
-            height: this.getScrollHeight()
-        });
-
-        this.$element.css('_top', 'expression(eval(document.compatMode && document.compatMode==\'CSS1Compat\') ? documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 : document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);');
-    };
+    /* methods end */
 
     /* Public methods */
 
-    Plugin.prototype.getScrollWidth = function () {
-        return Math.max(document.body ? document.body.scrollWidth : 0, document.documentElement ? document.documentElement.scrollWidth : 0);
-    };
-
-    Plugin.prototype.getScrollHeight = function () {
-        return Math.max(document.body ? document.body.scrollHeight : 0, document.documentElement ? document.documentElement.scrollHeight : 0);
-    };
-
     Plugin.prototype.show = function () {
-        if (this.$element.css('display') == 'none') {
-            this.$element.show(arguments);
-        }
+        this.$element.show();
     };
 
     Plugin.prototype.hide = function () {
-        if (this.$element.css('display') != 'none') {
-            this.$element.hide(arguments);
-        }
+        this.$element.hide();
     };
 
     /* Public methods end */

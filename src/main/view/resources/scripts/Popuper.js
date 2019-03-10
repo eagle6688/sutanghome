@@ -1,15 +1,15 @@
 /**
- * @license Popuper.js v20190224
- * (c) Aldwin. https://github.com/eagle6688
- * License: MIT
+ * Popuper.js v20190309
+ * dependency: jQuery.js, Background.js, devutility.js
+ * @license: MIT (c) Aldwin Su. https://github.com/eagle6688
  */
 
 (function ($, window, document, undefined) {
     var pluginName = 'Popuper';
 
     var defaults = {
-        selector: '', //Selector for popup dom.
-        zIndex: 101, //zIndex for popup dom.
+        selector: '', //Selector for popup element.
+        zIndex: 2001, //zIndex for popup element.
         background: null //Background object.
     };
 
@@ -21,10 +21,24 @@
 
     Plugin.prototype.constructor = Plugin;
 
+    /* init */
+
     Plugin.prototype._init = function () {
         this.$element = $(this.options.selector);
-        this.background = this._background();
+        this._initBackground();
         this._initElement();
+    };
+
+    Plugin.prototype._initBackground = function () {
+        if (this.options.background) {
+            return;
+        }
+
+        if (typeof Background == 'function') {
+            this.options.background = new Background({
+                'zIndex': this.options.zIndex - 1
+            });
+        }
     };
 
     Plugin.prototype._initElement = function () {
@@ -36,6 +50,8 @@
 
         this._setPosition();
     };
+
+    /* init end */
 
     Plugin.prototype._bind = function () {
         var self = this;
@@ -59,45 +75,24 @@
         });
     };
 
-    Plugin.prototype._background = function () {
-        if (this.options.background) {
-            return this.options.background;
-        }
-
-        if (typeof Background == 'function') {
-            this.options.background = new Background({
-                'zIndex': this.options.zIndex - 1
-            });
-
-            return this.options.background;
-        }
-
-        console.error('Parameter "background" cannot be null!');
-        return null;
-    };
-
     /* Public methods */
 
     Plugin.prototype.show = function () {
-        if (this.$element.css('display') == 'none') {
-            this.$element.show(arguments);
-        }
+        this.$element.show();
     };
 
     Plugin.prototype.showAll = function () {
-        this.options.background.show(arguments);
+        this.options.background.show();
         this.show();
     };
 
     Plugin.prototype.hide = function () {
-        if (this.$element.css('display') != 'none') {
-            this.$element.hide(arguments);
-        }
+        this.$element.hide();
     };
 
     Plugin.prototype.hideAll = function () {
         this.hide();
-        this.options.background.hide(arguments);
+        this.options.background.hide();
     };
 
     /* Public methods end */

@@ -105,8 +105,12 @@ common._init_sign_out = function () {
 common.bind_list = function ($list, listUrl) {
     var vueHelper = $list.vueHelper({
         url: listUrl,
-        onReload: function (data) {
+        beforeRequestData: function () {
+            common.loadingPopuper.showAll();
+        },
+        afterLoadData: function (data) {
             $('#pagination').data('pagination').changeTotalRecords(data.count);
+            common.loadingPopuper.hideAll();
         }
     });
 
@@ -119,7 +123,7 @@ common.bind_list = function ($list, listUrl) {
         buttonAClass: 'page-link',
         paginationClass: 'pagination justify-content-center',
         onPageClick: function (pageIndex) {
-            vueHelper.changePage(pageIndex);
+            vueHelper.changePageIndex(pageIndex);
         }
     });
 
@@ -129,15 +133,15 @@ common.bind_list = function ($list, listUrl) {
 /* Popuper and FormModal */
 
 common.loadingPopuper = new Popuper({
-    selector: '#img-loading'
+    selector: '#div-loading'
 });
 
 common._saveClick = function (modal) {
-    common.loadingPopuper.showAll();
+    common.loadingPopuper.show();
 };
 
 common._checkSaveResult = function (result, modal) {
-    common.loadingPopuper.hideAll();
+    common.loadingPopuper.hide();
 
     if (result.message) {
         alert(result.message);
