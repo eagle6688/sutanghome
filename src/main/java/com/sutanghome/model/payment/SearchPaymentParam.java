@@ -17,6 +17,9 @@ public class SearchPaymentParam {
 	@Min(value = 0, message = "请输入正确的userId！")
 	private int userId;
 
+	@Min(value = 0, message = "请输入正确的fromUserId！")
+	private int fromUserId;
+
 	private PaymentType type;
 
 	@Min(value = 0, message = "请输入正确的cost！")
@@ -50,6 +53,14 @@ public class SearchPaymentParam {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getFromUserId() {
+		return fromUserId;
+	}
+
+	public void setFromUserId(int fromUserId) {
+		this.fromUserId = fromUserId;
 	}
 
 	public PaymentType getType() {
@@ -133,6 +144,11 @@ public class SearchPaymentParam {
 
 		model.setId(getId());
 		model.setUserId(getUserId());
+
+		if (getFromUserId() > 0) {
+			model.setUserId(getFromUserId());
+		}
+
 		model.setType(getType());
 		model.setCost(getCost());
 		model.setMedium(getMedium());
